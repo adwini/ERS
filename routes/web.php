@@ -1,9 +1,7 @@
 <?php
 
-use App\Livewire\Navbar;
-use App\Livewire\Sidebar;
+use App\Livewire\MainDash;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\TryPage;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -13,4 +11,4 @@ use App\Livewire\TryPage;
 //     return view('welcome');
 // });
 
-Route::get('/',Navbar::class);
+Route::get('/',MainDash::class);
