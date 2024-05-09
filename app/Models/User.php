@@ -22,7 +22,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'number',
-        'birthdate',
+        'roles',
+        'no_of_tokens',
         'password',
     ];
 
@@ -44,7 +45,6 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'password' => 'hashed',
         'email_verified_at' => 'datetime',
-        'birthday' => 'date:Y-m-d'
     ];
 
      /**
@@ -67,6 +67,11 @@ class User extends Authenticatable implements JWTSubject
         return [
             'name' => $this->name
         ];
+    }
+
+    public function tokens()
+    {
+        return $this->hasMany(Tokens::class);
     }
 
 }
