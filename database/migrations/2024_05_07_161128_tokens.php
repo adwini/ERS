@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('tokens', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
+            $table->string('givenTo');
+            // $table->foreignIdFor(\App\Models\User::class);
             $table->string('givenBy');
             $table->dateTime('dateIssued', precision:0);
+            $table->timestamps();
         });
     }
 

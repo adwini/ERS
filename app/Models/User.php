@@ -69,9 +69,9 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
-    public function tokens()
-    {
-        return $this->hasMany(Tokens::class);
-    }
+    // public function tokens()
+    // {
+    //     return $this->hasMany(Tokens::class);
+    // }
 
 }
