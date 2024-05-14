@@ -45,6 +45,10 @@ class AuthController extends Controller
 
     public function register(Request $request, User $users){
 
+        if(!Auth::check()) {
+            return response()->json(['message' => 'You are not logged in!'], 403);;
+        }
+
         if(!Gate::allows('General_manager', $users) || !Gate::allows('Manager', $users)){
             return response()->json(['message' => 'You are not an admin.'], 403);
         }

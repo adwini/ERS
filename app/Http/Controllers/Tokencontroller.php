@@ -14,12 +14,11 @@ class Tokencontroller extends Controller
     public function giveToken(Request $request, User $user) {
 
         if(!Auth::check()) {
-            return response()->json(['message' => 'You are not logged in!'], 403);;
+            return response()->json(['message' => 'You are not logged in.'], 403);;
         }
 
-        if(!Gate::allows('employee', $user))
-        {
-            return response()->json(['message' => 'You are not authorize to give a token!'], 403);
+        if(!Gate::any(['GenMan', 'Manager'], $user)){
+            return response()->json(['message' => 'You are not authorize to give a token.'], 403);
         }
 
         $request->validate([

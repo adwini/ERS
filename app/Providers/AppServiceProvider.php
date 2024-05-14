@@ -14,11 +14,13 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         Gate::define('GenMan', function (User $user) {
-        return $user->role === 'General Manager';
-    });
-
+        return $user->roles === 'General Manager';
+        });
         Gate::define('Manager', function (User $user) {
-            return $user->role === 'Manager';
+            return $user->roles === 'Manager';
+        });
+        Gate::define('employee', function (User $user) {
+            return $user->roles === 'employee';
         });
     }
 
