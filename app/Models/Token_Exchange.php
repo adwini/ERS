@@ -17,10 +17,10 @@ class Token_Exchange extends Model
         'dateExchanged',
     ];
 
-    public function tokens()
-    {
-        return $this->belongsTo(Tokens::class);
-    }
+    // public function tokens()
+    // {
+    //     return $this->belongsTo(Tokens::class);
+    // }
 
     public function prizes() 
     {

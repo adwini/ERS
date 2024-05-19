@@ -12,17 +12,18 @@ class Tokens extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+        'givenTo',
         'givenBy',
         'dateIssued',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
-    public function token_exchange()
-    {
-        return $this->hasOne(Token_Exchange::class);
-    }
+    // public function token_exchange()
+    // {
+    //     return $this->hasOne(Token_Exchange::class);
+    // }
 }
