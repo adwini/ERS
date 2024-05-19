@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+
 use Illuminate\Http\Request;
 use App\Models\Tokens;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 
@@ -26,7 +27,7 @@ class Tokencontroller extends Controller
         ]);
 
         $nameOfUser = Auth::user();
-        
+
         $dateIssued = Carbon::now()->format('Y-m-d H:i:s');
 
         $token = Tokens::create([
@@ -48,7 +49,7 @@ class Tokencontroller extends Controller
         // $user->toQuery()->update([
         //     'no_of_tokens' => $numOfTokens
         // ]);
-        
+
         return response()->json(['message' => 'Token has been given!', 'data' => $numOfTokens], 200);
     }
 }
