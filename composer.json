@@ -9,8 +9,9 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.4",
-        "php-open-source-saver/jwt-auth": "^2.2"
+        "livewire/livewire": "^3.5",
+        "php-open-source-saver/jwt-auth": "^2.3",
+        "robsontenorio/mary": "^1.30"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
