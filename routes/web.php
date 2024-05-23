@@ -6,7 +6,6 @@ use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\AddToken;
 use App\Livewire\Admin\Modify;
 use App\Livewire\Admin\Voting;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,5 +23,4 @@ Route::get('/admin/dashboard', Dashboard::class)->name('admin_dashboard');
 Route::get('/admin/branch-list', Modify::class)->name('admin_branch_list');
 Route::get('/admin/token', AddToken::class)->name('admin_token');
 Route::get('/admin/voting', Voting::class)->name('admin_voting');
-
 
