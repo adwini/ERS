@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Admin;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Layout;
 use Mary\Traits\Toast;
 
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 
-#[Layout('components.layouts.app')]
 class Dashboard extends Component
 {
-      use Toast;
+    use Toast;
 
     public string $search = '';
 
@@ -30,41 +29,18 @@ class Dashboard extends Component
     {
         $this->warning("Will delete #$id", 'It is fake.', position: 'toast-bottom');
     }
-
-    // Table headers
-    public function headers(): array
-    {
-        return [
-            ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
-            ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'],
-            ['key' => 'age', 'label' => 'Age', 'class' => 'w-20'],
-            ['key' => 'email', 'label' => 'E-mail', 'sortable' => false],
-        ];
-    }
-
-    /**
-     * For demo purpose, this is a static collection.
-     *
-     * On real projects you do it with Eloquent collections.
-     * Please, refer to maryUI docs to see the eloquent examples.
-     */
-    public function users(): Collection
-    {
-        return collect([
-            ['id' => 1, 'name' => 'Mary', 'email' => 'mary@mary-ui.com', 'age' => 23],
-            ['id' => 2, 'name' => 'Giovanna', 'email' => 'giovanna@mary-ui.com', 'age' => 7],
-            ['id' => 3, 'name' => 'Marina', 'email' => 'marina@mary-ui.com', 'age' => 5],
-        ])
-            ->sortBy([[...array_values($this->sortBy)]])
-            ->when($this->search, function (Collection $collection) {
-                return $collection->filter(fn(array $item) => str($item['name'])->contains($this->search, true));
-            });
-    }
     public function render()
     {
+        $headers = [
+        ['key' => 'id', 'label' => '#'],
+        ['key' => 'branchName', 'label' => 'Branch Name'],
+        ['key' => 'branchLoc', 'label' => 'Location'],
+        ['key' => 'no_of_employee', 'label' => 'No. of Employee'],
+        // ['key' => 'city.name', 'label' => 'City'] # <---- nested attributes
+    ];
         return view('livewire.admin.dashboard', [
-            'users' => $this->users(),
-            'headers' => $this->headers()
+
+
         ]);
     }
 }
