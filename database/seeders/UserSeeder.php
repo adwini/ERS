@@ -1,12 +1,12 @@
 <?php
- 
+
 namespace Database\Seeders;
- 
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
- 
+
 class UserSeeder extends Seeder
 {
     /**
@@ -21,16 +21,24 @@ class UserSeeder extends Seeder
                 'email' => 'thesis1@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'roles' => 'General Manager',
+                'roles' => 'Manager',
                 'password' => Hash::make('password'),
-                
-            ], 
+
+            ],
             [
                 'name' => 'Jan Balbon',
                 'email' => 'jan@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'roles' => 'employee',
+                'roles' => 'Employee',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'Godwin',
+                'email' => 'test@example.com',
+                'number' => '09123456789',
+                'no_of_tokens' => 0,
+                'roles' => 'Admin',
                 'password' => Hash::make('password'),
             ]
         ];

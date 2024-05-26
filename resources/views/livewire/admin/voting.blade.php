@@ -1,3 +1,7 @@
+<x-app-layout>
+
 <div>
-    <h1> Test Admin Voting</h1>
+    <h1> VOTING</h1>
+
 </div>
+</x-app-layout>

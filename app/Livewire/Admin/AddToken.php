@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 
+
 class AddToken extends Component
 {
     public function render()

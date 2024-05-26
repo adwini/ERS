@@ -5,7 +5,9 @@ use Illuminate\Support\Collection;
 use Mary\Traits\Toast;
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.app')]
 class Dashboard extends Component
 {
       use Toast;

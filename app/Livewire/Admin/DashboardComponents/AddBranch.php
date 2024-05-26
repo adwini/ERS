@@ -3,7 +3,9 @@
 namespace App\Livewire\Admin\DashboardComponents;
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.app')]
 class AddBranch extends Component
 {
     public function render()
