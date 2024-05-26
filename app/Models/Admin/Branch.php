@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models\Admin;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Branch extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'branchName',
+        'branchLoc',
+        'no_of_employee'
+    ];
+}
