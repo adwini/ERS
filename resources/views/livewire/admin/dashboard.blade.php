@@ -1,6 +1,7 @@
 <x-app-layout>
+
 <div>
-<x-mary-header title="Branches">
+   <x-mary-header title="Branches">
     {{-- <x-slot:middle class="!justify-end">
         <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
     </x-slot:middle> --}}
@@ -22,29 +23,16 @@
       </tr>
     </thead>
     <tbody>
-      <!-- row 1 -->
-      <tr>
-        <th>1</th>
-        <td>Branch of Sogod</td>
-        <td>Sogod</td>
-        <td>20</td>
+        @foreach ($this->getBranches as $branch)
+        <tr>
+        <td>{{$branch->branchName}}</td>
+        <td>{{$branch->branchLoc}}</td>
+        <td>{{$branch->no_of_employee}}</td>
       </tr>
-      <!-- row 2 -->
-      <tr>
-        <th>2</th>
-        <td>Branch of Catmon</td>
-        <td>Catmon</td>
-        <td>20</td>
-      </tr>
-      <!-- row 3 -->
-      <tr>
-        <th>3</th>
-        <td>Branch of Mandaue</td>
-        <td>Mandaue</td>
-        <td>20</td>
-      </tr>
+        @endforeach
     </tbody>
   </table>
 </div>
 </div>
+
 </x-app-layout>

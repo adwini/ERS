@@ -15,26 +15,19 @@ Route::middleware('guest')->group(function () {
 
 });
 
-Route::view('dashboard', 'livewire.admin.dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth','verified'])->group(function () {
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+    Route::view('profile', 'profile')->name('profile');
+    Route::view('branch-list', 'livewire.admin.modify')->name('branch-list');
+    Route::view('token', 'livewire.admin.add_token')->name('add_token');
+    Route::view('voting', 'livewire.admin.voting')->name('voting');
+    Volt::route('dashboard', 'pages.admin.dashboard')->name('dashboard');
+});
 
 
-Route::view('branch-list', 'livewire.admin.modify')
-    ->middleware(['auth', 'verified'])
-    ->name('branch-list');
 
-Route::view('token', 'livewire.admin.add_token')
-    ->middleware(['auth', 'verified'])
-    ->name('add_token');
 
-Route::view('voting', 'livewire.admin.voting')
-    ->middleware(['auth', 'verified'])
-    ->name('voting');
+
 
 require __DIR__.'/auth.php';
 

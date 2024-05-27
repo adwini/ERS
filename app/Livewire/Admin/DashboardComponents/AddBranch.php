@@ -4,10 +4,8 @@ namespace App\Livewire\Admin\DashboardComponents;
 
 use Livewire\Component;
 use Livewire\Attributes\Layout;
-use App\Models\Admin\Branch;
-
-#[Layout('components.layouts.app')]
-class AddBranch extends Component
+use App\Models\Branch;
+ class AddBranch extends Component
 {
 
     public function render()
@@ -26,7 +24,6 @@ class AddBranch extends Component
             'branchName' => 'required|max:255',
             'branchLoc' => 'required|max:255',
         ]);
-
         Branch::create($validated);
         $this->reset();
     }
