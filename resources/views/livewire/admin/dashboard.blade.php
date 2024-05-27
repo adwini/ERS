@@ -1,4 +1,3 @@
-<x-app-layout>
 
 <div>
    <x-mary-header title="Branches">
@@ -35,4 +34,4 @@
 </div>
 </div>
 
-</x-app-layout>
+ 

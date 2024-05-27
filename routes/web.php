@@ -1,6 +1,11 @@
 <?php
 
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\Modify;
+use App\Livewire\Admin\AddToken;
+use App\Livewire\Admin\Voting;
+
+
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\Admin\DashboardComponents\AddBranch;
@@ -9,7 +14,6 @@ use App\Livewire\Admin\DashboardComponents\EditBranch;
 
 // Route::view('/', 'welcome');
 Route::middleware('guest')->group(function () {
-
     Volt::route('/', 'pages.auth.login')
         ->name('login');
 
@@ -18,16 +22,11 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth','verified'])->group(function () {
 
     Route::view('profile', 'profile')->name('profile');
-    Route::view('branch-list', 'livewire.admin.modify')->name('branch-list');
-    Route::view('token', 'livewire.admin.add_token')->name('add_token');
-    Route::view('voting', 'livewire.admin.voting')->name('voting');
+    Route::get('/branch-list',Modify::class)->name('modify_branch');
+    Route::get('/token', AddToken::class)->name('add_token');
+    Route::get('/voting', Voting::class)->name('voting');
     Volt::route('dashboard', 'pages.admin.dashboard')->name('dashboard');
 });
-
-
-
-
-
 
 require __DIR__.'/auth.php';
 
