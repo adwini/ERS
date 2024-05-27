@@ -30,6 +30,22 @@ class AddToken extends Component
         ]);
 
         $added_token = Token::create($validated);
+
+        // save token and associate with giver(manager/admin)
         $user->tokens()->save($added_token);
+
+        //get the name of the branch/employee that has given a token
+        $name_given_a_token = $added_token->givenTo;
+
+        //get all the tokens that has the token that belonged to the branch/employee
+        $overAllToken = Tokens::where('givenTo', $name_given_a_token)->get();
+
+        //count all token and update
+        $numOfTokens = $overAllToken->count();
+        User::where('name', $nameGivenTo)->update(['no_of_tokens' => $numOfTokens]);
+
+        session()->flash('success', 'Giving token has been successful.');
+        //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
+        return $this->redirect('/branches', navigate:true);
     }
 }
