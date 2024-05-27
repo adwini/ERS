@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('branchName');
             $table->string('branchLoc');
             $table->integer('no_of_employee');
+            $table->integer('no_of_token_available');
             $table->timestamps();
         });
     }

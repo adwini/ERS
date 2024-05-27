@@ -68,9 +68,9 @@ class User extends Authenticatable
         ];
     }
 
-    // public function tokens()
-    // {
-    //     return $this->hasMany(Tokens::class);
-    // }
+    public function tokens()
+    {
+        return $this->hasMany(Tokens::class);
+    }
 
 }

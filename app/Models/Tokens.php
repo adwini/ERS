@@ -13,14 +13,15 @@ class Tokens extends Model
 
     protected $fillable = [
         'givenTo',
-        'givenBy',
+        // 'givenBy',
         'dateIssued',
+        'no_of_tokens_given'
     ];
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     // public function token_exchange()
     // {

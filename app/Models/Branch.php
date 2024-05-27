@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
     use HasFactory;
+    
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'branchName',
         'branchLoc',
-        'no_of_employee'
+        'no_of_employee',
+        'no_of_token_available'
     ];
 }
