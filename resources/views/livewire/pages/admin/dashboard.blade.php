@@ -28,7 +28,7 @@ new #[Layout('layouts.app')] class extends Component
     ];
 
 
-    // Fetch the branches from the database
+    // Fetch the branches from the database+---
     public function mount()
     {
         $this->branches = Branch::all();
@@ -41,16 +41,31 @@ new #[Layout('layouts.app')] class extends Component
             'branchLoc' => 'required|max:255',
             'no_of_employee'=>'required|int'
         ]);
+
         Branch::create($validated);
-         $this->reset();
+        $this->reset();
         $this->addModal = false;
 
        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
+     public function resetForm()
+    {
+        $this->reset(['branchName', 'branchLoc', 'no_of_employee']);
+        $this->resetErrorBag();
+    }
+     public function cancel()
+    {
+        $this->resetForm();
+        $this->addModal = false;
+    }
 
-
-
-
+    public function updatedAddModal($value)
+    {
+        if (!$value) {
+            $this->resetForm();
+            $this->resetErrorBag();
+        }
+    }
 
  }
 ?>
@@ -125,8 +140,8 @@ new #[Layout('layouts.app')] class extends Component
 
 
 {{-- Modal for Adding a branch --}}
-<x-mary-modal wire:model="addModal" class="backdrop-blur">
-<x-mary-form wire:submit="save">
+<x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
+<x-mary-form wire:submit.prevent="save">
     <x-mary-input label="Branch Name" wire:model="branchName" class=""/>
     <x-mary-input label="Branch Location" wire:model="branchLoc" />
     <x-mary-input label="Number of Employees" wire:model="no_of_employee"/>
@@ -134,7 +149,7 @@ new #[Layout('layouts.app')] class extends Component
 
     <x-slot:actions>
 
-    <x-mary-button label="Cancel" @click="$wire.addModal = false" />
+<x-mary-button label="Cancel" @click="$wire.call('cancel')" />
    <x-mary-button label="Add" class="btn-primary" type="submit" spinner="save" />
     </x-slot:actions>
 </x-mary-form>
