@@ -40,13 +40,9 @@
         </td>
          <td class="px-6 py-4">
 
-        <x-mary-button
-                type="submit"
-              onclick="deleteModal.showModal()"
-                label="Delete"
-                class="btn-secondary"
-        />
-        <x-mary-button label="Edit" wire:click="edit({{ $branch->id }})"/>
+        <x-mary-button tooltip="Delete" type="submit" onclick="deleteModal.showModal()" icon="o-trash" class="btn-secondary" spinner/>
+        <x-mary-button icon="o-pencil-square" tooltip="Edit" wire:click="edit({{ $branch->id }})"/>
+
 
         </td>
       </tr>
@@ -82,6 +78,11 @@
         <x-mary-button label="Delete" class="btn-secondary"  wire:click="delete({{ $branch->id }})" />
     </x-slot:actions>
 </x-mary-modal>
+
+
+{{-- Delete Modal  --}}
+
+
 
 </div>
 

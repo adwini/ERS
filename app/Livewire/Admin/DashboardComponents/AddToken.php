@@ -22,14 +22,14 @@ class AddToken extends Component
     public function addToken(Branch $branch, User $user) {
 
         $dateNow = Carbon::now()->format('Y-m-d H:i:s');
-        
+
         $validated = $this->validated([
             'givenTo' => 'required|string|max:255',
             'dateIssued' => $dateNow,
             'no_of_tokens_given' => 'required|integer',
         ]);
 
-        $added_token = Token::create($validated);
+        $added_token = Tokens::create($validated);
 
         // save token and associate with giver(manager/admin)
         $user->tokens()->save($added_token);

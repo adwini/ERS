@@ -16,7 +16,7 @@ class AddToken extends Component
     public $branchLoc = '';
 
     public AddBranchForm $form;
- 
+
 
     public function updateBranch(){
 
@@ -59,15 +59,8 @@ class AddToken extends Component
         public function render()
     {
 
-    $headers = [
-        ['key' => 'branchName', 'label' => 'Branch Name'],
-        ['key' => 'branchLoc', 'label' => 'Location'],
-        ['key' => 'no_of_employee', 'label' => 'No. of Employee'],
-        // ['key' => 'city.name', 'label' => 'City'] # <---- nested attributes
-    ];
         return view('livewire.admin.add_token',[
             'branches'=> Branch::all(),
-            'headers'=> $headers,
 
         ]);
     }

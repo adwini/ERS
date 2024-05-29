@@ -1,10 +1,13 @@
 
 <div>
-    <x-mary-header title="Dashboard" class="text-xs font-medium">
+    <x-mary-header title="Dashboard" class="text-xxs font-medium">
+
         <x-slot:actions>
             <x-mary-button icon="o-plus" class="btn-primary" tooltip="Add Branch" @click="$wire.addModal = true" />
         </x-slot:actions>
     </x-mary-header>
+
+
 
 <div class="overflow-x-auto">
   <table class="table">
