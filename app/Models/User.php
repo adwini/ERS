@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'number',
-        'roles',
+        'position',
         'no_of_tokens',
         'password',
     ];
@@ -68,9 +68,9 @@ class User extends Authenticatable
         ];
     }
 
-    // public function tokens()
-    // {
-    //     return $this->hasMany(Tokens::class);
-    // }
+    public function tokens()
+    {
+        return $this->hasMany(Tokens::class);
+    }
 
 }

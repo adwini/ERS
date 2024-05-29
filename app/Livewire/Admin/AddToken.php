@@ -13,4 +13,6 @@ class AddToken extends Component
     {
         return view('livewire.admin.add_token');
     }
+
+    public function giveToken(Branch $branch){}
 }
