@@ -33,4 +33,5 @@ class EditBranch extends Component
         //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
         return $this->redirect('/branches', navigate:true);
     }
+
 }

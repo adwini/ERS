@@ -90,4 +90,6 @@ class AddToken extends Component
 
         ]);
     }
+
+    public function giveToken(Branch $branch){}
 }
