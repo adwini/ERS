@@ -9,6 +9,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
+
+
  <livewire:layout.navigation />
     {{-- NAVBAR mobile only --}}
     <x-mary-nav sticky class="lg:hidden">

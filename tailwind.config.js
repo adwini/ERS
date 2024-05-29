@@ -4,7 +4,7 @@ import forms from "@tailwindcss/forms";
 /** @type {import('tailwindcss').Config} */
 export default {
     daisyui: {
-        themes: ["night", "light"],
+        themes: ["dim", "light"],
     },
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",

@@ -48,6 +48,8 @@ new #[Layout('layouts.app')] class extends Component
 
        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
+
+
      public function resetForm()
     {
         $this->reset(['branchName', 'branchLoc', 'no_of_employee']);
@@ -71,38 +73,11 @@ new #[Layout('layouts.app')] class extends Component
 ?>
 
 <div>
-    <x-mary-header title="Branches">
+    <x-mary-header title="Dashboard" class="text-xs font-medium">
         <x-slot:actions>
             <x-mary-button icon="o-plus" class="btn-primary" tooltip="Add Branch" @click="$wire.addModal = true" />
         </x-slot:actions>
     </x-mary-header>
-
-    {{-- <x-mary-table :headers="$headers" :rows="$branches" striped @row-click="alert($event.detail.name)" /> --}}
-
-
-    {{-- <div class="overflow-x-auto">
-        <table class="table">
-            <!-- head -->
-            <thead>
-                <tr>
-
-                    <th>Branch Name              </th>
-                    <th>        </th>
-                    <th>No. of Employees         </th>
-                </tr>
-            </thead>
-            <tbody>
-               @foreach ($branches as $branch)
-                    <tr>
-                        <td>{{ $branch->branchName }}</td>
-                        <td>{{ $branch->branchLoc }}</td>
-                        <td>{{ $branch->no_of_employee }}</td>
-                    </tr>
-          @endforeach
-            </tbody>
-        </table>
-    </div> --}}
-
 
 <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
