@@ -11,6 +11,7 @@ export default {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./vendor/robsontenorio/mary/src/View/Components/**/*.php",
+        "./app/Livewire/**/*.php",
     ],
 
     theme: {

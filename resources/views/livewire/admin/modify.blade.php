@@ -5,8 +5,57 @@
         </x-slot:actions>
     </x-mary-header>
 
-    <x-mary-table :headers="$headers" :rows="$branches" striped @row-click="wire.edit($id)" />
+    {{-- <x-mary-table :headers="$headers" :rows="$branches" striped @row-click="wire.edit($id)" /> --}}
 
+    <div class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead >
+      <tr>
+        <th scope="col" class="px-6 py-3">
+            Branch Name
+        </th>
+        <th scope="col" class="px-6 py-3">
+            Branch Location
+        </th>
+        <th scope="col" class="px-6 py-3">
+            No. of Employees
+        </th>
+          <th scope="col" class="px-6 py-3">
+            Actions
+        </th>
+</tr>
+    </thead>
+    <tbody>
+           @foreach ($branches as $branch)
+      <tr class="hover" wire:key"{{ $branch->id}}">
+        <td class="px-6 py-4">
+            {{ $branch->branchName }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $branch->branchLoc }}
+        </td>
+        <td class="px-6 py-4">
+            {{ $branch->no_of_employee }}
+        </td>
+         <td class="px-6 py-4">
+
+        <x-mary-button
+                type="submit"
+              onclick="deleteModal.showModal()"
+                label="Delete"
+                class="btn-secondary"
+        />
+        <x-mary-button label="Edit" wire:click="edit({{ $branch->id }})"/>
+
+        </td>
+      </tr>
+
+    @endforeach
+    </tbody>
+  </table>
+</div>
+    {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
     <x-mary-form wire:submit.prevent="save">
         <x-mary-input label="Branch Name" wire:model="form.branchName" class=""/>
@@ -21,6 +70,18 @@
         </x-slot:actions>
     </x-mary-form>
     </x-mary-modal>
+
+
+    {{-- Delete Modal --}}
+    <x-mary-modal id="deleteModal" title="Are you sure?">
+    <div>Do you really want to delete these records? This process cannot be undone.</div>
+
+    <x-slot:actions>
+        {{-- Notice `onclick` is HTML --}}
+        <x-mary-button label="Cancel" onclick="deleteModal.close()" />
+        <x-mary-button label="Delete" class="btn-secondary"  wire:click="delete({{ $branch->id }})" />
+    </x-slot:actions>
+</x-mary-modal>
 
 </div>
 

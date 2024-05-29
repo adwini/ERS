@@ -25,7 +25,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/branch-list',Modify::class)->name('modify_branch');
     Route::get('/token', AddToken::class)->name('add_token');
     Route::get('/voting', Voting::class)->name('voting');
-    Volt::route('dashboard', 'pages.admin.dashboard')->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 });
 
 require __DIR__.'/auth.php';

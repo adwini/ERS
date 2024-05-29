@@ -16,13 +16,7 @@ class AddToken extends Component
     public $branchLoc = '';
 
     public AddBranchForm $form;
-
-
-    // public function editBranch(Branch $branch) {
-    //     $this->branch=$branch;
-    //     $this->branchName=$branch->branchName;
-    //     $this->branchLoc=$branch->branchLoc;
-    // }
+ 
 
     public function updateBranch(){
 
@@ -36,20 +30,7 @@ class AddToken extends Component
         return $this->redirect('/branches', navigate:true);
     }
 
-    //     public function save() {
 
-    //     $validated = $this->validate([
-    //         'branchName' => 'required|max:255',
-    //         'branchLoc' => 'required|max:255',
-    //         'no_of_employee'=>'required|int'
-    //     ]);
-
-    //     Branch::create($validated);
-    //     $this->reset();
-    //     $this->addModal = false;
-
-    //    $this->redirectIntended(default: route('modify_branch', absolute: false), navigate: true);
-    // }
 
     public function edit($id){
         $branch = Branch::find($id );
