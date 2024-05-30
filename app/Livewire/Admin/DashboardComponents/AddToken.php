@@ -42,7 +42,7 @@ class AddToken extends Component
 
         //count all token and update
         $numOfTokens = $overAllToken->count();
-        User::where('name', $nameGivenTo)->update(['no_of_tokens' => $numOfTokens]);
+        User::where('name',  $nameGivenTo)->update(['no_of_tokens' => $numOfTokens]);
 
         session()->flash('success', 'Giving token has been successful.');
         //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
