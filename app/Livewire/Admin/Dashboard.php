@@ -5,13 +5,21 @@ namespace App\Livewire\Admin;
 use App\Livewire\Forms\AddBranchForm;
 use App\Models\Branch;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
-
+#[Lazy]
 class Dashboard extends Component
+
 {
 
+    public function placeholder(){
+        return view ('skeleton');
+    }
+
+    use WithPagination;
     public function mount()
     {
         $this->branches = Branch::all();
@@ -26,24 +34,28 @@ class Dashboard extends Component
     ];
 
         return view('livewire.admin.dashboard', [
-           'brach'=> Branch::all(),
-           'header'=> $headers,
+            // 'branch'=> Branch::paginate($this->perPage),
+            // 'branches'=> Branch::all(),
+            'branch_pag' =>Branch::paginate(10),
+
+            'header'=> $headers,
 
         ]);
     }
 
+    // public $perPage = 10;
      public $branches = [];
     public bool $addModal = false;
+
+    // public $branch_pag =[];
+
+    public $search = '';
 
     public $branchName = '';
     public $branchLoc = '';
     public $no_of_employee = '';
 
     public AddBranchForm $form;
-
-
-
-    // Fetch the branches from the database+---
 
 
      public function save() {

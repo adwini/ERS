@@ -3,10 +3,12 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Branch;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Livewire\Forms\AddBranchForm;
 
+#[Lazy]
 
 #[Layout('layouts.app')]
 class Modify extends Component
@@ -19,22 +21,6 @@ class Modify extends Component
     public AddBranchForm $form;
 
     public bool $editMode = false;
-
-
-
-    // public function updateBranch(){
-
-    //     $validated = $this->validate([
-    //         'branchName' => 'required|max:255',
-    //         'branchLoc' => 'required|max:255',
-    //     ]);
-    //     $this->branch->update($validated);
-    //     session()->flash('success', 'Branch Updated Successfully.');
-    //     //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
-    //     return $this->redirect('/branches', navigate:true);
-    // }
-
-
 
 
     public function edit($id){
@@ -72,7 +58,9 @@ class Modify extends Component
         }
 
 
-
+    public function placeholder(){
+        return view ('skeleton');
+    }
     public function render()
     {
 
@@ -89,9 +77,10 @@ class Modify extends Component
         ]);
     }
 
-    public function delete(Branch $branchId){
+    public function delete($branchId){
 
-       $branchId->delete();
+        $branch = Branch::findOrFail($branchId);
+         $branch->delete();
         return $this->redirect('/branch-list', navigate:true);
     }
 

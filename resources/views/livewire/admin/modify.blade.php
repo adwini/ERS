@@ -5,52 +5,56 @@
         </x-slot:actions>
     </x-mary-header>
 
-    {{-- <x-mary-table :headers="$headers" :rows="$branches" striped @row-click="wire.edit($id)" /> --}}
 
-    <div class="overflow-x-auto">
-  <table class="table">
-    <!-- head -->
-    <thead >
-      <tr>
-        <th scope="col" class="px-6 py-3">
+ <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                   <th scope="col" class="px-6 py-3">
             Branch Name
         </th>
         <th scope="col" class="px-6 py-3">
             Branch Location
         </th>
         <th scope="col" class="px-6 py-3">
-            No. of Employees
+            Number of Employees
+        </th>
+        <th scope="col" class="px-6 py-3">
+           Total Tokens
         </th>
           <th scope="col" class="px-6 py-3">
-            Actions
+           Actions
         </th>
-</tr>
-    </thead>
-    <tbody>
-           @foreach ($branches as $branch)
-      <tr class="hover" wire:key"{{ $branch->id}}">
+            </tr>
+        </thead>
+        <tbody>
+              @foreach ($branches as $branch)
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" wire:key"{{ $branch->id}}">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ $branch->branchName }}
+                </th>
+                <td class="px-6 py-4">
+                   {{ $branch->branchLoc }}
+                </td>
+                <td class="px-6 py-4">
+                   {{ $branch->no_of_employee }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $branch->no_of_token_available }}
+                </td>
         <td class="px-6 py-4">
-            {{ $branch->branchName }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $branch->branchLoc }}
-        </td>
-        <td class="px-6 py-4">
-            {{ $branch->no_of_employee }}
-        </td>
-         <td class="px-6 py-4">
 
         <x-mary-button tooltip="Delete" type="submit" onclick="deleteModal.showModal()" icon="o-trash" class="btn-secondary" spinner/>
         <x-mary-button icon="o-pencil-square" tooltip="Edit" wire:click="edit({{ $branch->id }})"/>
 
 
         </td>
-      </tr>
-
-    @endforeach
-    </tbody>
-  </table>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
+
     {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
     <x-mary-form wire:submit.prevent="save">
