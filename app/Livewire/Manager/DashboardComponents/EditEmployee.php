@@ -12,14 +12,14 @@ class EditEmployee extends Component
         return view('livewire.manager.dashboard-components.edit-employee');
     }
 
-    public $user = '';
+    public $user;
     public $name = '';
     public $email = '';
     public $number = '';
     public $position  = '';
     public $password = '';
 
-    public function editUser(User $user) {
+    public function mount(User $user) {
         $this->user = $user;
         $this->name = $user->name;
         $this->email = $user->email;

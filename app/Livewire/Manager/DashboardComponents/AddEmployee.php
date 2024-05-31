@@ -19,7 +19,7 @@ class AddEmployee extends Component
     public $position = '';
     public $password = '';
 
-    public function addBranch() {
+    public function addUser() {
 
         $validated = $this->validate([
             'name' => 'required|string|max:255|min:2',
@@ -30,6 +30,7 @@ class AddEmployee extends Component
             'password' => 'required|string|max:255|min:6',
         ]);
         User::create($validated);
+        session()->flash('success', 'Branch Added Successfully.');
         $this->reset();
     }
 }

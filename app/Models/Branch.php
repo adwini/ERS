@@ -21,4 +21,9 @@ class Branch extends Model
         public function scopeSearch($query,$value){
         $query->where('branchName','like',"%$value%")->orWhere('branchLoc','like',"%$value%");
     }
+
+    public function tokens()
+    {
+        return $this->hasMany(Tokens::class);
+    }
 }

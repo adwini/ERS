@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('givenTo');
             $table->foreignIdFor(\App\Models\User::class);
+            $table->foreignIdFor(\App\Models\Branch::class);
             // $table->string('givenBy');
             $table->dateTime('dateIssued', precision:0);
             $table->integer('no_of_tokens_given')->default(0);
