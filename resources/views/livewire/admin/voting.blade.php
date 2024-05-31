@@ -1,5 +1,6 @@
 
 <div>
-    <h1> VOTING</h1>
+
+ <livewire:globalComponents.branch_table/>
 
 </div>
