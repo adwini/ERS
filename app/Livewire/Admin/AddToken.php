@@ -10,7 +10,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Tokens;
 use Carbon\Carbon;
-use App\Models\AllTokens;
+use App\Models\Total_token_admin;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -33,7 +33,7 @@ class AddToken extends Component
 
     public $givenTo = '';
     public $dateIssued = '';
-    public $no_of_tokens_given = 0;
+    public $no_of_tokens_given;
 
     public function addToken(Branch $branch, User $user) {
 
@@ -65,9 +65,9 @@ class AddToken extends Component
         return $this->redirect('/branches', navigate:true);
     }
 
-    public $available_token = 0;
+    public $available_token;
 
-    public function get_available_token(){
-        $this->available_token = AllTokens::latest()->take(1)->get();
+    public function mount(){
+        $this->available_token = Total_token_admin::latest()->take(1)->get();
     }
 }
