@@ -6,10 +6,10 @@
 
 
    $headers = [
-        ['key' => 'branchName', 'label' => 'Branch Name'],
-        ['key' => 'branchLoc', 'label' => 'Location'],
-        ['key' => 'no_of_employee', 'label' => 'No. of Employee'],
-        ['key' => 'no_of_token_available', 'label' => 'Total Token'],
+        ['key' => 'branchName', 'label' => 'BRANCH NAME'],
+        ['key' => 'branchLoc', 'label' => 'LOCATION'],
+        ['key' => 'no_of_employee', 'label' => 'NUMBER OF EMPLOYEE'],
+        ['key' => 'no_of_token_available', 'label' => 'TOTAL TOKEN'],
 
         // ['key' => 'city.name', 'label' => 'City'] # <---- nested attributes
     ];
@@ -29,22 +29,22 @@
  <x-mary-table :headers="$headers" :rows="$search" :row-decoration striped @row-click="$wire.edit($event.detail.id)" with-pagination>
 
     @scope('header_branchName', $header)
-        <h2 class="text-xl font-bold text-amber-700">
-            {{ $header['label'] }}
+    <h2 class="text-sm font-bold text-gray-350">
+    {{ $header['label'] }}
         </h2>
     @endscope
     @scope('header_branchLoc', $header)
-    <h2 class="text-xl font-bold text-amber-700">
+    <h2 class="text-sm font-bold text-gray-350">
             {{ $header['label'] }}
         </h2>
     @endscope
     @scope('header_no_of_employee', $header)
-        <h2 class="text-xl font-bold text-amber-700">
+        <h2 class="text-sm font-bold text-gray-350">
             {{ $header['label'] }}
         </h2>
     @endscope
     @scope('header_no_of_token_available', $header)
-        <h2 class="text-xl font-bold text-amber-700">
+        <h2 class="text-sm font-bold text-gray-350">
             {{ $header['label'] }}
         </h2>
     @endscope
