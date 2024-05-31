@@ -1,60 +1,58 @@
+<?php
+
+    use App\Models\Branch;
+
+    $search = Branch::search($this->search)->paginate($this->page);
+
+
+   $headers = [
+        ['key' => 'branchName', 'label' => 'Branch Name'],
+        ['key' => 'branchLoc', 'label' => 'Location'],
+        ['key' => 'no_of_employee', 'label' => 'No. of Employee'],
+        ['key' => 'no_of_token_available', 'label' => 'Total Token'],
+
+        // ['key' => 'city.name', 'label' => 'City'] # <---- nested attributes
+    ];
+?>
+
 <div>
     <x-mary-header title="Modify Branches">
+        <x-slot:middle class="!justify-end">
+         <x-mary-input icon="o-magnifying-glass" wire:model.live="search" clearable placeholder="Search..." />
+     </x-slot:middle>
         <x-slot:actions>
             <x-mary-button icon="o-plus" class="btn-primary" tooltip="Add Branch" @click="$wire.addModal = true" />
         </x-slot:actions>
     </x-mary-header>
 
 
- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                   <th scope="col" class="px-6 py-3">
-            Branch Name
-        </th>
-        <th scope="col" class="px-6 py-3">
-            Branch Location
-        </th>
-        <th scope="col" class="px-6 py-3">
-            Number of Employees
-        </th>
-        <th scope="col" class="px-6 py-3">
-           Total Tokens
-        </th>
-          <th scope="col" class="px-6 py-3">
-           Actions
-        </th>
-            </tr>
-        </thead>
-        <tbody>
-              @foreach ($branches as $branch)
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" wire:key"{{ $branch->id}}">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $branch->branchName }}
-                </th>
-                <td class="px-6 py-4">
-                   {{ $branch->branchLoc }}
-                </td>
-                <td class="px-6 py-4">
-                   {{ $branch->no_of_employee }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ $branch->no_of_token_available }}
-                </td>
-        <td class="px-6 py-4">
+ <x-mary-table :headers="$headers" :rows="$search" :row-decoration striped @row-click="$wire.edit($event.detail.id)" with-pagination>
 
-        <x-mary-button tooltip="Delete" type="submit" onclick="deleteModal.showModal()" icon="o-trash" class="btn-secondary" spinner/>
-        <x-mary-button icon="o-pencil-square" tooltip="Edit" wire:click="edit({{ $branch->id }})"/>
+    @scope('header_branchName', $header)
+        <h2 class="text-xl font-bold text-amber-700">
+            {{ $header['label'] }}
+        </h2>
+    @endscope
+    @scope('header_branchLoc', $header)
+    <h2 class="text-xl font-bold text-amber-700">
+            {{ $header['label'] }}
+        </h2>
+    @endscope
+    @scope('header_no_of_employee', $header)
+        <h2 class="text-xl font-bold text-amber-700">
+            {{ $header['label'] }}
+        </h2>
+    @endscope
+    @scope('header_no_of_token_available', $header)
+        <h2 class="text-xl font-bold text-amber-700">
+            {{ $header['label'] }}
+        </h2>
+    @endscope
 
-
-        </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
+    @scope('actions', $branch)
+        <x-mary-button icon="o-trash" wire:click="delete({{ $branch->id }})" wire:confirm="Are you sure you want to delete this post?" spinner class="btn-sm btn-error" />
+    @endscope
+</x-mary-table>
     {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
     <x-mary-form wire:submit.prevent="save">
@@ -73,16 +71,10 @@
 
 
     {{-- Delete Modal --}}
-    <x-mary-modal id="deleteModal" title="Are you sure?">
-    <div>Do you really want to delete these records? This process cannot be undone.</div>
 
-    <x-slot:actions>
-        {{-- Notice `onclick` is HTML --}}
-        <x-mary-button label="Cancel" onclick="deleteModal.close()" />
-        <x-mary-button label="Delete" class="btn-secondary"  wire:click="delete({{ $branch->id }})" />
-    </x-slot:actions>
-</x-mary-modal>
-
+    {{-- <div class="mt-4 mb-2" >
+        {{ $search->links() }}
+    </div> --}}
 
 {{-- Delete Modal  --}}
 

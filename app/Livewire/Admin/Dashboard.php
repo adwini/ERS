@@ -7,6 +7,7 @@ use App\Models\Branch;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
+use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 
 #[Layout('layouts.app')]
@@ -19,7 +20,7 @@ class Dashboard extends Component
         return view ('skeleton');
     }
 
-    use WithPagination;
+   use WithPagination, WithoutUrlPagination;
     public function mount()
     {
         $this->branches = Branch::all();

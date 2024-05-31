@@ -7,20 +7,33 @@ use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Livewire\Forms\AddBranchForm;
+use Livewire\Features\SupportPagination\WithoutUrlPagination;
+use Livewire\WithPagination;
 
 #[Lazy]
 
 #[Layout('layouts.app')]
 class Modify extends Component
 {
+       use WithPagination, WithoutUrlPagination;
 
-    public $branch;
-    public $branchName = '';
-    public $branchLoc = '';
 
     public AddBranchForm $form;
+    public $search = '';
+    public $page = 10;
+    public $branch;
+    // public $branchName = '';
+    // public $branchLoc = '';
+
+
 
     public bool $editMode = false;
+
+    public function mount( ){
+
+        $dataFromDb = Branch::all();
+
+    }
 
 
     public function edit($id){
@@ -64,15 +77,7 @@ class Modify extends Component
     public function render()
     {
 
-    $headers = [
-        ['key' => 'branchName', 'label' => 'Branch Name'],
-        ['key' => 'branchLoc', 'label' => 'Location'],
-        ['key' => 'no_of_employee', 'label' => 'No. of Employee'],
-        // ['key' => 'city.name', 'label' => 'City'] # <---- nested attributes
-    ];
         return view('livewire.admin.modify',[
-            'branches'=> Branch::all(),
-            'headers'=> $headers,
 
         ]);
     }
