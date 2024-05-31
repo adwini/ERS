@@ -23,6 +23,11 @@ class Tokens extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
     // public function token_exchange()
     // {
     //     return $this->hasOne(Token_Exchange::class);

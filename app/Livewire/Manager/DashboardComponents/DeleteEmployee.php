@@ -12,7 +12,7 @@ class DeleteEmployee extends Component
         return view('livewire.manager.dashboard-components.delete-employee');
     }
 
-    public function deleteBranch(User $user) {
+    public function deleteUser(User $user) {
         $user->delete();
         session()->flash('success', 'User Deleted Successfully.');
         return $this->redirect('/users', navigate:true);

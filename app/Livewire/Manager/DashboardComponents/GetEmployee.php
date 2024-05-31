@@ -12,7 +12,7 @@ class GetEmployee extends Component
         return view('livewire.manager.dashboard-components.get-employee');
     }
 
-    public $getBranches = [];
+    public $getUsers = [];
     public function mount(User $user) {
         //Pangitaon lang user nga same sa Branch_ID
         //Wa pa na butangan ug Branch_ID and DB. Butangi sa Models/Migrations ug seeders
