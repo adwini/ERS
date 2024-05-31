@@ -10,6 +10,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Tokens;
 use Carbon\Carbon;
+use App\Models\AllTokens;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -62,5 +63,11 @@ class AddToken extends Component
         session()->flash('success', 'Giving token has been successful.');
         //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
         return $this->redirect('/branches', navigate:true);
+    }
+
+    public $available_token = 0;
+
+    public function get_available_token(){
+        $this->available_token = AllTokens::latest()->take(1)->get();
     }
 }
