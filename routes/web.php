@@ -19,7 +19,25 @@ Route::middleware('guest')->group(function () {
 
 });
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth','verified','admin'])->group(function () {
+
+    Route::view('profile', 'profile')->name('profile');
+    Route::get('/branch-list',Modify::class)->name('modify_branch');
+    Route::get('/token', AddToken::class)->name('add_token');
+    Route::get('/voting', Voting::class)->name('voting');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+});
+
+Route::middleware(['auth','verified','manager'])->group(function () {
+
+    Route::view('profile', 'profile')->name('profile');
+    Route::get('/branch-list',Modify::class)->name('modify_branch');
+    Route::get('/token', AddToken::class)->name('add_token');
+    Route::get('/voting', Voting::class)->name('voting');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+});
+
+Route::middleware(['auth','verified','employee'])->group(function () {
 
     Route::view('profile', 'profile')->name('profile');
     Route::get('/branch-list',Modify::class)->name('modify_branch');
@@ -29,6 +47,7 @@ Route::middleware(['auth','verified'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
 
 
 

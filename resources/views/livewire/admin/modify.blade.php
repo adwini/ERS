@@ -50,7 +50,7 @@
     @endscope
 
     @scope('actions', $branch)
-        <x-mary-button icon="o-trash" wire:click="delete({{ $branch->id }})" wire:confirm="Are you sure you want to delete this post?" spinner class="btn-sm btn-error" />
+        <x-mary-button icon="o-trash" wire:click="delete({{ $branch->id }})" wire:confirm="Are you sure you want to delete this branch?" spinner class="btn-sm btn-error" />
     @endscope
 </x-mary-table>
     {{-- Add Modal --}}

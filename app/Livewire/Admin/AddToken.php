@@ -43,24 +43,35 @@ class AddToken extends Component
         ]);
     }
 
-    #[Validate('required|string')]public $givenTo = '';
-    #[Validate('required')]public $dateIssued ='';
-    #[Validate('required|int')]public $no_of_tokens_given;
+    // #[Validate('required|string')]
+
+    public $givenTo = '';
+    // #[Validate('required')]
+
+    public $dateIssued ='';
+    // #[Validate('required|int')]
+
+    public $no_of_tokens_given;
 
     public bool $addModal =false;
 
     public function addToken(Branch $branch, User $user) {
+ 
+
+        $this->addModal = true;
 
         $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
-        $validated = $this->validate();
-
-        $added_token = Tokens::create([
-
-             $validated,
-            'dateIssued' => $dateNow
+        $validated = $this->validate(
+        [
+            'givenTo' => 'required|string',
+            'dateIssued' =>   $dateNow ,
+            'no_of_tokens_given' => 'required|int',
         ]);
-            dd('test')  ;
+
+        $added_token = Tokens::create(
+             $validated,    );
+
 
         // save token and associate with giver(manager/admin)
         $user->tokens()->save($added_token);
@@ -77,7 +88,8 @@ class AddToken extends Component
 
         session()->flash('success', 'Giving token has been successful.');
         //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
-          $this->redirect('/token', navigate:true);
+        $this->redirect('/token', navigate:true);
+
 
 
     }

@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'email' => 'manager@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'position' => 'Manager',
+                'position' => 'MANAGER',
                 'password' => Hash::make('password'),
 
             ],
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'email' => 'employee@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'position' => 'Hr',
+                'position' => 'HR',
                 'password' => Hash::make('password'),
             ],
             [
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 'email' => 'hrjan@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'position' => 'Hr',
+                'position' => 'HR',
                 'password' => Hash::make('password'),
             ],
             [
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'position' => 'Admin',
+                'position' => 'ADMIN',
                 'password' => Hash::make('password'),
             ]
         ];

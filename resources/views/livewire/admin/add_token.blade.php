@@ -28,7 +28,7 @@
           {{-- <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind</p> --}}
       </div>
 
-      <x-mary-table :headers="$headers" :rows="$search" :row-decoration striped @click="$wire.addModal = true" with-pagination>
+      <x-mary-table :headers="$headers" :rows="$search" :row-decoration striped @row-click="$wire.addToken($event.detail.id)" with-pagination>
 
     @scope('header_branchName', $header)
     <h2 class="text-sm font-bold text-gray-350">
@@ -67,8 +67,6 @@
         </x-slot:actions>
     </x-mary-form>
     </x-mary-modal>
-
-
 
 
 
