@@ -3,7 +3,8 @@
 namespace App\Livewire\Manager;
 
 use Livewire\Component;
-
+use Livewire\Attributes\Layout;
+#[Layout('layouts.manager')]
 class AccountSettings extends Component
 {
     public function render()
