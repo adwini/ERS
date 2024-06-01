@@ -28,23 +28,27 @@ Route::middleware(['auth','verified','admin'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
 });
 
-Route::middleware(['auth','verified','manager'])->group(function () {
+// //  For Demo Purposes Only
+// Route::middleware(['auth','verified','manager'])->group(function () {
 
-    Route::view('profile', 'profile')->name('profile');
-    Route::get('/branch-list',Modify::class)->name('modify_branch');
-    Route::get('/token', AddToken::class)->name('add_token');
-    Route::get('/voting', Voting::class)->name('voting');
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-});
+//     Route::view('profile', 'profile')->name('profile');
+//     Route::get('/branch-list',Modify::class)->name('modify_branch');
+//     Route::get('/token', AddToken::class)->name('add_token');
+//     Route::get('/voting', Voting::class)->name('voting');
+//     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+// });
 
-Route::middleware(['auth','verified','employee'])->group(function () {
 
-    Route::view('profile', 'profile')->name('profile');
-    Route::get('/branch-list',Modify::class)->name('modify_branch');
-    Route::get('/token', AddToken::class)->name('add_token');
-    Route::get('/voting', Voting::class)->name('voting');
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
-});
+// //  For Demo Purposes Only
+
+// Route::middleware(['auth','verified','employee'])->group(function () {
+
+//     Route::view('profile', 'profile')->name('profile');
+//     Route::get('/branch-list',Modify::class)->name('modify_branch');
+//     Route::get('/token', AddToken::class)->name('add_token');
+//     Route::get('/voting', Voting::class)->name('voting');
+//     Route::get('/dashboard', Dashboard::class)->name('dashboard');
+// });
 
 require __DIR__.'/auth.php';
 
