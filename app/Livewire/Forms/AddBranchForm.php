@@ -32,7 +32,7 @@ class AddBranchForm extends Form
         $this->branchName = $branch->branchName;
         // $this->no_of_token_available = $branch->no_of_token_available;
         $this->no_of_employee = $branch->no_of_employee;
-        // $this->content = $branch->content;
+
     }
 
 

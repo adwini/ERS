@@ -23,6 +23,17 @@
 
     </x-mary-header>
 
+        @if ($search->isEmpty())
+        <section  >
+    <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
+        <div class="max-w-screen-sm mx-auto text-center">
+             <p class="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white">Something's missing.</p>
+            <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, we couldn't find any branches matching your search criteria.</p>
+         </div>
+    </div>
+</section>
+    @else
+
     <div class="max-w-screen-sm mx-auto mb-8 text-center lg:mb-16">
           <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-200">Total Token {{ $available_token }}</h2>
           {{-- <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind</p> --}}
@@ -54,6 +65,8 @@
 
 
 </x-mary-table>
+
+    @endif
     {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
     <x-mary-form wire:submit.prevent="addToken">

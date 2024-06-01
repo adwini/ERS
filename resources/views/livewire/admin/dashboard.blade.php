@@ -25,6 +25,16 @@
         </x-slot:actions>
     </x-mary-header>
 
+     @if ($search->isEmpty())
+        <section  >
+    <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
+        <div class="max-w-screen-sm mx-auto text-center">
+             <p class="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white">Something's missing.</p>
+            <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, we couldn't find any branches matching your search criteria.</p>
+         </div>
+    </div>
+</section>
+    @else
 
  <x-mary-table :headers="$headers" :rows="$search" :row-decoration striped with-pagination>
 
@@ -50,6 +60,8 @@
     @endscope
 
 </x-mary-table>
+
+  @endif
     {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
     <x-mary-form wire:submit.prevent="save">
