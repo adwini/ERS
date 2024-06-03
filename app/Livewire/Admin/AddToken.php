@@ -16,6 +16,7 @@ use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -43,9 +44,16 @@ class AddToken extends Component
         return view('livewire.admin.add_token', []);
     }
 
+    protected $rules = [
+        'givenTo' => 'required|string',
+        'dateIssued' =>  'required',
+        'given_by' => 'required',
+        'no_of_tokens_given' => 'required|int',
+    ];
     // #[Validate('required|string')]
 
     public $givenTo = '';
+    public $given_by = '';
     // #[Validate('required')]
 
     public $dateIssued = '';
@@ -64,27 +72,21 @@ class AddToken extends Component
 
     public function addToken()
     {
-
-
-
         // $this->form->save();
         // $this->addModal = false;
         // $this->success('Token Successfully Given');
 
         try {
 
+            $this->validate();
+
             $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
-            $validated = $this->validate(
-                [
-                    'givenTo' => 'required|string',
-                    'dateIssued' =>  $dateNow,
-                    'no_of_tokens_given' => 'required|int',
-                ]
-            );
-
             $added_token = Tokens::create([
-                $validated
+                'givenTo' => $this->givenTo,
+                'dateIssued' => $dateNow,
+                'given_by' => auth()->id(),
+                'no_of_tokens_given' => $this->no_of_tokens_given
             ]);
 
             $user = User::where('name', '=', $added_token->givenTo)->first();
@@ -111,7 +113,7 @@ class AddToken extends Component
             $this->delete($added_token->id);
             $this->reset();
         } catch (Exception $e) {
-            return $e;
+            dd($e);
         }
     }
 
