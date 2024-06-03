@@ -30,18 +30,19 @@ class AddToken extends Component
     public AddTokenForm $form;
     public $search = '';
     public $page = 10;
-    public $branch;
+
 
     public function placeholder()
     {
         return view('skeleton');
     }
 
-
     public function render()
     {
 
-        return view('livewire.admin.add_token', []);
+        return view('livewire.admin.add_token', [
+            'branches' => $branches,
+        ]);
     }
 
     protected $rules = [
@@ -63,11 +64,25 @@ class AddToken extends Component
 
     public bool $addModal = false;
 
+    // public function edit($id)
+    // {
+    //     $branch = Branch::find($id);
+    //     $this->form->setToken($branch);
+    //     $this->addModal = true;
+    // }
+
+
     public function edit($id)
     {
+        $dateNow = Carbon::now()->format('Y-m-d H:i:s');
+
         $branch = Branch::find($id);
-        $this->form->setToken($branch);
-        $this->addModal = true;
+        if ($branch) {
+            $this->form->branchName = $branch->branchName;
+            $this->givenTo = $branch->branchName;
+            $this->dateIssued = $dateNow;
+            $this->addModal = true;
+        }
     }
 
     public function addToken()
@@ -82,6 +97,9 @@ class AddToken extends Component
 
             $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
+            // $added_token = Tokens::create([
+            //     $validated
+            // ]);
             $added_token = Tokens::create([
                 'givenTo' => $this->givenTo,
                 'dateIssued' => $dateNow,
@@ -110,10 +128,10 @@ class AddToken extends Component
                     redirectTo: '/token'
                 );
             }
-            $this->delete($added_token->id);
+            // $this->delete($added_token->id);
             $this->reset();
         } catch (Exception $e) {
-            dd($e);
+            return $e;
         }
     }
 

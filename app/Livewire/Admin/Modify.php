@@ -26,6 +26,7 @@ class Modify extends Component
     public $branch;
     public bool $addModal = false;
     public bool $deleteModal = false;
+    public bool $editMode = false;
 
     public function mount()
     {
@@ -37,14 +38,23 @@ class Modify extends Component
     {
         $branch = Branch::find($id);
         $this->form->setBranch($branch);
+        $this->editMode = true;
         $this->addModal = true;
     }
 
     public function save()
     {
-        $this->form->store();
+
+        if ($this->editMode) {
+            $this->form->update();
+            $this->editMode = false;
+        } else {
+            $this->form->store();
+        }
         $this->addModal = false;
-        $this->success('Saved Successfully');
+        $this->success(
+            'Saved Successfully',
+        );
     }
     public function delete($branchId)
     {
@@ -69,7 +79,12 @@ class Modify extends Component
 
     public function render()
     {
+        $branches = Branch::where('branchName', 'like', '%' . $this->search . '%')
+            ->orWhere('branchLoc', 'like', '%' . $this->search . '%')
+            ->paginate($this->page);
 
-        return view('livewire.admin.modify', []);
+        return view('livewire.admin.modify', [
+            'branches' => $branches,
+        ]);
     }
 }

@@ -18,9 +18,6 @@ class Branch extends Model
         'no_of_token_available'
     ];
 
-        public function scopeSearch($query,$value){
-        $query->where('branchName','like',"%$value%")->orWhere('branchLoc','like',"%$value%");
-    }
 
     public function tokens()
     {

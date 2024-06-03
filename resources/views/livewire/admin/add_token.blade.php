@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\Branch;
-
-$search = Branch::search($this->search)->paginate($this->page);
-
 $headers = [
     ['key' => 'branchName', 'label' => 'BRANCH NAME'],
     ['key' => 'branchLoc', 'label' => 'LOCATION'],
@@ -22,7 +18,7 @@ $headers = [
 
     </x-mary-header>
 
-    @if ($search->isEmpty())
+    @if ($branches->isEmpty())
         <section>
             <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
                 <div class="max-w-screen-sm mx-auto text-center">
@@ -40,7 +36,7 @@ $headers = [
             {{-- <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind</p> --}}
         </div>
 
-        <x-mary-table :headers="$headers" :rows="$search" :row-decoration striped
+        <x-mary-table :headers="$headers" :rows="$branches" :row-decoration striped
             @row-click="$wire.edit($event.detail.id)" with-pagination>
 
             @scope('header_branchName', $header)
@@ -72,6 +68,7 @@ $headers = [
     {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
         <x-mary-form wire:submit.prevent="addToken">
+            <x-mary-input type="hidden" wire:model="givenTo" />
             <x-mary-input label="Branch Name" wire:model="form.branchName" disabled />
             <x-mary-input label="Add Token" wire:model="no_of_tokens_given" />
             <x-slot:actions>

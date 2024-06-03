@@ -86,9 +86,14 @@ class Dashboard extends Component
     {
         return view('skeleton');
     }
-
     public function render()
     {
-        return view('livewire.admin.dashboard', []);
+        $branches = Branch::where('branchName', 'like', '%' . $this->search . '%')
+            ->orWhere('branchLoc', 'like', '%' . $this->search . '%')
+            ->paginate($this->page);
+
+        return view('livewire.admin.dashboard', [
+            'branches' => $branches,
+        ]);
     }
 }
