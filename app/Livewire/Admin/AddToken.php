@@ -29,7 +29,7 @@ class AddToken extends Component
     public AddTokenForm $form;
     public $search = '';
     public $page = 10;
-    public $branch;
+
 
     public function placeholder()
     {
@@ -59,11 +59,25 @@ class AddToken extends Component
 
     public bool $addModal = false;
 
+    // public function edit($id)
+    // {
+    //     $branch = Branch::find($id);
+    //     $this->form->setToken($branch);
+    //     $this->addModal = true;
+    // }
+
+
     public function edit($id)
     {
+        $dateNow = Carbon::now()->format('Y-m-d H:i:s');
+
         $branch = Branch::find($id);
-        $this->form->setToken($branch);
-        $this->addModal = true;
+        if ($branch) {
+            $this->form->branchName = $branch->branchName;
+            $this->givenTo = $branch->branchName;
+            $this->dateIssued = $dateNow;
+            $this->addModal = true;
+        }
     }
 
     public function addToken()
@@ -77,18 +91,22 @@ class AddToken extends Component
 
         try {
 
-            $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
             $validated = $this->validate(
                 [
                     'givenTo' => 'required|string',
-                    'dateIssued' =>  $dateNow,
+                    'dateIssued' =>  'required',
                     'no_of_tokens_given' => 'required|int',
                 ]
             );
 
+            // $added_token = Tokens::create([
+            //     $validated
+            // ]);
             $added_token = Tokens::create([
-                $validated
+                'givenTo' => $this->givenTo,
+                'dateIssued' => $this->dateIssued,
+                'no_of_tokens_given' => $this->no_of_tokens_given,
             ]);
 
             $user = User::where('name', '=', $added_token->givenTo)->first();
@@ -112,10 +130,10 @@ class AddToken extends Component
                     redirectTo: '/token'
                 );
             }
-            $this->delete($added_token->id);
+            // $this->delete($added_token->id);
             $this->reset();
         } catch (Exception $e) {
-            return $e;
+            dd($e->getMessage());
         }
     }
 
