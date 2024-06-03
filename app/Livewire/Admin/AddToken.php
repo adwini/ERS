@@ -36,11 +36,15 @@ class AddToken extends Component
         return view('skeleton');
     }
 
-
     public function render()
     {
+        $branches = Branch::where('branchName', 'like', '%' . $this->search . '%')
+            ->orWhere('branchLoc', 'like', '%' . $this->search . '%')
+            ->paginate($this->page);
 
-        return view('livewire.admin.add_token', []);
+        return view('livewire.admin.add_token', [
+            'branches' => $branches,
+        ]);
     }
 
     // #[Validate('required|string')]
