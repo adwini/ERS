@@ -7,7 +7,7 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class AddBranchForm extends Form
+class AddUserForm extends Form
 {
 
     #[Validate('required|string')]
@@ -24,42 +24,43 @@ class AddBranchForm extends Form
 
     // public $no_of_token_available;
 
-    public ?Branch $branch;
+    public ? Branch $branch;
 
-    public function setBranch(Branch $branch)
-    {
+    public function setBranch(Branch $branch){
         $this->branch = $branch;
         $this->branchLoc = $branch->branchLoc;
         $this->branchName = $branch->branchName;
         // $this->no_of_token_available = $branch->no_of_token_available;
         $this->no_of_employee = $branch->no_of_employee;
+
     }
 
 
-    public function store()
-    {
+    public function store(){
         $this->validate();
 
         Branch::create([
-            'branchName' => $this->branchName,
-            'branchLoc' => $this->branchLoc,
+            'branchName'=> $this->branchName,
+            'branchLoc'=> $this->branchLoc,
             // 'no_of_token_available' => $this->no_of_token_available,
-            'no_of_employee' => $this->no_of_employee
-        ]);
+            'no_of_employee'=> $this->no_of_employee]);
 
-        $this->reset();
-    }
-    public function update()
-    {
+            $this->reset();
+
+     }
+      public function update(){
         $this->validate();
 
         $this->branch->update([
-            'branchName' => $this->branchName,
-            'branchLoc' => $this->branchLoc,
+            'branchName'=> $this->branchName,
+            'branchLoc'=> $this->branchLoc,
             // 'no_of_token_available' => $this->no_of_token_available,
-            'no_of_employee' => $this->no_of_employee
-        ]);
+            'no_of_employee'=> $this->no_of_employee]);
 
-        $this->reset();
-    }
+            $this->reset();
+
+     }
+
+
+
 }

@@ -16,82 +16,79 @@ use Mary\Traits\Toast;
 #[Layout('layouts.app')]
 class Dashboard extends Component
 {
-       use WithPagination, WithoutUrlPagination, Toast;
+    use WithPagination, WithoutUrlPagination, Toast;
 
 
     public AddBranchForm $form;
     public $search = '';
     public $page = 10;
     public $branch;
-    // public $branchName = '';
-    // public $branchLoc = '';
 
 
 
     public bool $editMode = false;
 
-    public function mount( ){
+    public bool $addModal = false;
+    public bool $deleteModal = false;
 
-        $dataFromDb = Branch::all();
-
+    public function mount()
+    {
+        Branch::all();
     }
 
 
-    public function edit($id){
-        $branch = Branch::find($id );
+    public function edit($id)
+    {
+        $branch = Branch::find($id);
         $this->form->setBranch($branch);
         $this->editMode = true;
         $this->addModal = true;
     }
 
-    public function save(){
+    public function save()
+    {
 
-        if ($this->editMode){
+        if ($this->editMode) {
             $this->form->update();
             $this->editMode = false;
-        }else{
-        $this->form->store();
-
-
+        } else {
+            $this->form->store();
         }
 
         $this->addModal = false;
-        $this->success('Saved Successfully'
-                     );
+        $this->success(
+            'Saved Successfully'
+        );
     }
 
-    public bool $addModal =false;
-    public bool $deleteModal = false;
+    public function delete($branchId)
+    {
+
+        $branch = Branch::findOrFail($branchId);
+        $branch->delete();
+        $this->success(
+            'Deleted Successfully',
+            redirectTo: '/token'
+        );
+        // return $this->redirect('/branch-list', navigate:true);
+    }
+
+    public function cancel()
+    {
+        $this->reset();
+        $this->resetErrorBag();
+        $this->addModal = false;
+        // Clear validation errors
+    }
 
 
-
-        public function cancel()
-        {
-            $this->reset();
-            $this->resetErrorBag();
-            $this->addModal = false;
-             // Clear validation errors
-        }
-
-
-    public function placeholder(){
-        return view ('skeleton');
+    public function placeholder()
+    {
+        return view('skeleton');
     }
 
     public function render()
     {
-        return view('livewire.admin.dashboard',[
-
-        ]);
+        return view('livewire.admin.dashboard', []);
     }
-
-    public function delete($branchId){
-
-        $branch = Branch::findOrFail($branchId);
-         $branch->delete();
-          $this->success('Deleted Successfully',
-                     redirectTo: '/token');
-        // return $this->redirect('/branch-list', navigate:true);
-    }
-
 }
