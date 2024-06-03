@@ -15,12 +15,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 
-// Route::view('/', 'welcome');
-// Route::middleware('guest')->group(function () {
-//     Volt::route('/', 'pages.auth.login')
-//         ->name('login');
 
-// });
 
 Route::middleware(['auth','verified','admin'])->group(function () {
 

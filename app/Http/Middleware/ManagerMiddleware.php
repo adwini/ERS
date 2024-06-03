@@ -17,8 +17,8 @@ class ManagerMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::user()->position == 'MANAGER'){
-            // return $next($request);
-            return redirect()->route('auth2.dashboard');
+            return $next($request);
+            // return redirect()->route('auth2.dashboard');
         }
 
         abort(401);
