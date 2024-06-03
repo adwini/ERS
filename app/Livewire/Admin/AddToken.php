@@ -15,6 +15,7 @@ use App\Models\Total_token_admin;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
+use Exception;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -56,45 +57,62 @@ class AddToken extends Component
 
     public bool $addModal =false;
 
-    public function addToken(Branch $branch, User $user) {
-
+    public function addToken() {
 
         $this->addModal = true;
 
-        $dateNow = Carbon::now()->format('Y-m-d H:i:s');
+        try{
+            
+            $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
-        $validated = $this->validate(
-        [
-            'givenTo' => 'required|string',
-            'dateIssued' =>   $dateNow ,
-            'no_of_tokens_given' => 'required|int',
-        ]);
+            $validated = $this->validate(
+            [
+                'givenTo' => 'required|string',
+                'dateIssued' =>  $dateNow,
+                'no_of_tokens_given' => 'required|int',
+            ]);
 
-        $added_token = Tokens::create(
-             $validated,    );
+            $added_token = Tokens::create([
+                $validated
+            ]);
 
+            $user = User::where('name', '=', $added_token->givenTo)->first();
+            if($user != null) {
+                $user->no_of_tokens += $added_token->no_of_tokens_given;
+                $user->save();
 
-        // // save token and associate with giver(manager/admin)
-        // $user->tokens()->save($added_token);
+                // session()->flash('success', 'Giving token has been successful.');
+                //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
+                // $this->redirect('/user', navigate:true);
 
-        // //get the name of the branch/employee that has given a token
-        // $name_given_a_token = $added_token->givenTo;
-
-        // //get all the tokens that has the token that belonged to the branch/employee
-        // $overAllToken = Tokens::where('givenTo', $name_given_a_token)->get();
-
-        // //count all token and update
-        // $numOfTokens = $overAllToken->count();
-        // User::where('name', '=', $name_given_a_token)->update(['no_of_tokens' => $numOfTokens]);
-
-        $this->success('Giving token has been successful',
+                $this->success('Giving token has been successful',
                      redirectTo: '/token');
-    }
+            }
+
+            $branch = Branch::where('branchName','=', $added_token->givenTo)->first();
+            if($branch != null) {
+                $branch->no_of_token_available += $added_token->no_of_tokens_given;
+                $branch->save();
+
+                $this->success('Giving token has been successful',
+                     redirectTo: '/token');
+            }
+
+            $this->delete($added_token->id);
+            
+        } catch (Exception $e) {
+            return $e;
+        }
+}
 
     public $available_token;
 
-//     public function mount(){
-//         $this->available_token = Total_token_admin::latest()->first();
-//  }
+    public function get_all_tokens(){
+        $this->available_token = Total_token_admin::latest()->take(1)->get();
+    }
 
+    public function delete_token($id) {
+        $branch = Branch::find($id);
+        $branch->delete();
+    }
 }
