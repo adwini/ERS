@@ -16,6 +16,7 @@ use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -47,9 +48,16 @@ class AddToken extends Component
         ]);
     }
 
+    protected $rules = [
+        'givenTo' => 'required|string',
+        'dateIssued' =>  'required',
+        'given_by' => 'required',
+        'no_of_tokens_given' => 'required|int',
+    ];
     // #[Validate('required|string')]
 
     public $givenTo = '';
+    public $given_by = '';
     // #[Validate('required')]
 
     public $dateIssued = '';
@@ -82,31 +90,24 @@ class AddToken extends Component
 
     public function addToken()
     {
-
-
-
         // $this->form->save();
         // $this->addModal = false;
         // $this->success('Token Successfully Given');
 
         try {
 
+            $this->validate();
 
-            $validated = $this->validate(
-                [
-                    'givenTo' => 'required|string',
-                    'dateIssued' =>  'required',
-                    'no_of_tokens_given' => 'required|int',
-                ]
-            );
+            $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
             // $added_token = Tokens::create([
             //     $validated
             // ]);
             $added_token = Tokens::create([
                 'givenTo' => $this->givenTo,
-                'dateIssued' => $this->dateIssued,
-                'no_of_tokens_given' => $this->no_of_tokens_given,
+                'dateIssued' => $dateNow,
+                'given_by' => auth()->id(),
+                'no_of_tokens_given' => $this->no_of_tokens_given
             ]);
 
             $user = User::where('name', '=', $added_token->givenTo)->first();
@@ -133,7 +134,7 @@ class AddToken extends Component
             // $this->delete($added_token->id);
             $this->reset();
         } catch (Exception $e) {
-            dd($e->getMessage());
+            return $e;
         }
     }
 

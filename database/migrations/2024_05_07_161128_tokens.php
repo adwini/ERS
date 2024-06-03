@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('tokens', function (Blueprint $table) {
             $table->id();
             $table->string('givenTo');
-            $table->foreignIdFor(\App\Models\User::class);
-            $table->foreignIdFor(\App\Models\Branch::class);
+            $table->unsignedBigInteger('given_by');
+            $table->foreign('given_by')->references('id')->on('users');
             // $table->string('givenBy');
             $table->dateTime('dateIssued', precision:0);
             $table->integer('no_of_tokens_given')->default(0);

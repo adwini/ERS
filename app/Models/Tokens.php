@@ -15,6 +15,7 @@ class Tokens extends Model
         'givenTo',
         // 'givenBy',
         'dateIssued',
+        'given_by',
         'no_of_tokens_given'
     ];
 
