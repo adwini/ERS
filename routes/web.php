@@ -6,18 +6,21 @@ use App\Livewire\Admin\AddToken;
 use App\Livewire\Admin\Voting;
 
 
+use App\Livewire\Manager\AccountManagement;
+use App\Livewire\Manager\AccountSettings;
+use App\Livewire\Manager\Dashboard as ManagerDashboard;
+use App\Livewire\Manager\RewardDistribution;
+use App\Livewire\Manager\Voting as ManagerVoting;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
-use App\Livewire\Admin\DashboardComponents\AddBranch;
-use App\Livewire\Admin\DashboardComponents\GetBranch;
-use App\Livewire\Admin\DashboardComponents\EditBranch;
+
 
 // Route::view('/', 'welcome');
-Route::middleware('guest')->group(function () {
-    Volt::route('/', 'pages.auth.login')
-        ->name('login');
+// Route::middleware('guest')->group(function () {
+//     Volt::route('/', 'pages.auth.login')
+//         ->name('login');
 
-});
+// });
 
 Route::middleware(['auth','verified','admin'])->group(function () {
 
@@ -29,14 +32,15 @@ Route::middleware(['auth','verified','admin'])->group(function () {
 });
 
 // //  For Demo Purposes Only
-// Route::middleware(['auth','verified','manager'])->group(function () {
+Route::middleware(['auth','verified','manager'])->group(function () {
 
-//     Route::view('profile', 'profile')->name('profile');
-//     Route::get('/branch-list',Modify::class)->name('modify_branch');
-//     Route::get('/token', AddToken::class)->name('add_token');
-//     Route::get('/voting', Voting::class)->name('voting');
-//     Route::get('/dashboard', Dashboard::class)->name('dashboard');
-// });
+    // Route::view('profile', 'profile')->name('profile');
+    Route::get('/account/settings',AccountSettings::class)->name('account.settings');
+    Route::get('/account/management',AccountManagement::class)->name('account.management');
+    Route::get('/rewards', RewardDistribution::class)->name('rewards');
+    Route::get('/auth2/voting', ManagerVoting::class)->name('auth2.voting');
+    Route::get('/auth2/dashboard', ManagerDashboard::class)->name('auth2.dashboard');
+});
 
 
 // //  For Demo Purposes Only

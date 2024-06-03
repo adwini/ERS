@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use App\Models\Total_token_admin;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Mary\Traits\Toast;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -21,7 +22,7 @@ use Livewire\WithPagination;
 class AddToken extends Component
 {
 
-    use WithPagination, WithoutUrlPagination;
+    use WithPagination, WithoutUrlPagination, Toast;
 
 
     public AddBranchForm $form;
@@ -56,7 +57,7 @@ class AddToken extends Component
     public bool $addModal =false;
 
     public function addToken(Branch $branch, User $user) {
- 
+
 
         $this->addModal = true;
 
@@ -73,25 +74,21 @@ class AddToken extends Component
              $validated,    );
 
 
-        // save token and associate with giver(manager/admin)
-        $user->tokens()->save($added_token);
+        // // save token and associate with giver(manager/admin)
+        // $user->tokens()->save($added_token);
 
-        //get the name of the branch/employee that has given a token
-        $name_given_a_token = $added_token->givenTo;
+        // //get the name of the branch/employee that has given a token
+        // $name_given_a_token = $added_token->givenTo;
 
-        //get all the tokens that has the token that belonged to the branch/employee
-        $overAllToken = Tokens::where('givenTo', $name_given_a_token)->get();
+        // //get all the tokens that has the token that belonged to the branch/employee
+        // $overAllToken = Tokens::where('givenTo', $name_given_a_token)->get();
 
-        //count all token and update
-        $numOfTokens = $overAllToken->count();
-        User::where('name', '=', $name_given_a_token)->update(['no_of_tokens' => $numOfTokens]);
+        // //count all token and update
+        // $numOfTokens = $overAllToken->count();
+        // User::where('name', '=', $name_given_a_token)->update(['no_of_tokens' => $numOfTokens]);
 
-        session()->flash('success', 'Giving token has been successful.');
-        //USBA LANG NI BOL, PASABOT ANI PARA NAA REFRESH SA PAGE. IKAW LANG PAG KUAN SA ROUTES SA VIEW.
-        $this->redirect('/token', navigate:true);
-
-
-
+        $this->success('Giving token has been successful',
+                     redirectTo: '/token');
     }
 
     public $available_token;

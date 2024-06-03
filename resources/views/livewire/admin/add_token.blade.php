@@ -85,15 +85,3 @@
 
 </div>
 
-
-{{-- <div class="grid grid-cols-1 gap-4 mb-4 sm:grid-cols-2 lg:grid-cols-2">
-        <div class="shadow-xl card w-96 bg-base-100">
-            <div class="card-body">
-                <h2 class="card-title">Card title!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div class="justify-end card-actions">
-                <button class="btn btn-primary">Buy Now</button>
-                </div>
-            </div>
-        </div>
-</div> --}}

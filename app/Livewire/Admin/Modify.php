@@ -9,13 +9,15 @@ use Livewire\Attributes\Layout;
 use App\Livewire\Forms\AddBranchForm;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
+use Mary\Traits\Toast;
+
 
 #[Lazy]
 
 #[Layout('layouts.app')]
 class Modify extends Component
 {
-       use WithPagination, WithoutUrlPagination;
+       use WithPagination, WithoutUrlPagination, Toast;
 
 
     public AddBranchForm $form;
@@ -55,6 +57,9 @@ class Modify extends Component
         }
 
         $this->addModal = false;
+
+        $this->success('Saved Successfully',
+                     );
     }
 
     public bool $addModal =false;
@@ -82,11 +87,13 @@ class Modify extends Component
         ]);
     }
 
-    public function delete($branchId){
+    public function delete($branchId)
+    {
 
         $branch = Branch::findOrFail($branchId);
          $branch->delete();
-        return $this->redirect('/branch-list', navigate:true);
+         $this->success('Deleted Successfully');
+
     }
 
 }
