@@ -39,6 +39,9 @@ class AddToken extends Component
 
     public function render()
     {
+        $branches = Branch::where('branchName', 'like', '%' . $this->search . '%')
+            ->orWhere('branchLoc', 'like', '%' . $this->search . '%')
+            ->paginate($this->page);
 
         return view('livewire.admin.add_token', [
             'branches' => $branches,
