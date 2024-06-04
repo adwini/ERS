@@ -17,6 +17,7 @@ use Livewire\WithPagination;
 use Mary\Traits\Toast;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 #[Layout('layouts.app')]
 #[Lazy]
@@ -62,10 +63,6 @@ class AddToken extends Component
     public $no_of_tokens_given;
 
     public bool $addModal = false;
-
-    public $branchId = '';
-    public $userId = '';
-
 
     public function edit($id)
     {
@@ -116,10 +113,14 @@ class AddToken extends Component
                 'no_of_tokens_given' => $this->no_of_tokens_given,
             ]);
 
+            $over_all_tokens = Total_token_admin::latest()->take(1)->first();
+            $over_all_tokens->token_available -= $added_token->no_of_tokens_given;
+            $over_all_tokens->save();
+
             $user = User::where('name', '=', $added_token->givenTo)->first();
             if ($user != null) {
                 $user->no_of_tokens += $added_token->no_of_tokens_given;
-                $user->save([$added_token]);
+                $user->save();
 
                 $this->success(
                     'Giving token has been successful',
@@ -130,7 +131,7 @@ class AddToken extends Component
             $branch = Branch::where('branchName', '=', $added_token->givenTo)->first();
             if ($branch != null) {
                 $branch->no_of_token_available += $added_token->no_of_tokens_given;
-                $branch->save([$added_token]);
+                $branch->save();
 
                 $this->success(
                     'Giving token has been successful',
@@ -144,16 +145,21 @@ class AddToken extends Component
         }
     }
 
-    public $available_token;
+    public $available_token = '';
 
-    public function get_all_tokens()
+    public function mount()
     {
-        $this->available_token = Total_token_admin::latest()->take(1)->get();
+        try {
+            $get_available_token = Total_token_admin::latest()->take(1)->first();
+            $this->available_token = $get_available_token->token_available;
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 
     public function delete_token($id)
     {
-        $branch = Branch::find($id);
+        $branch = Tokens::find($id);
         $branch->delete();
     }
 }

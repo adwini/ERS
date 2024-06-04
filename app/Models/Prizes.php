@@ -9,6 +9,7 @@ class Prizes extends Model
 {
     use HasFactory;
 
+    protected $table = 'prizes';
     protected $primaryKey = 'id';
 
     protected $fillable = [
