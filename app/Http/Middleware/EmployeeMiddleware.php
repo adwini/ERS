@@ -16,8 +16,22 @@ class EmployeeMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->position == 'EMPLOYEE'){
-            return $next($request);
+        if (!Auth::check()) {
+            abort(401);
         }
- abort(401);    }
+
+        $position = Auth::user()->position;
+
+        $actions = [
+            'EMPLOYEE' => fn ($request) => $next($request),
+            'MANAGER' => fn () => redirect()->route('auth2.dashboard'),
+            'ADMIN' => fn () => redirect()->route('dashboard'),
+        ];
+
+        if (isset($actions[$position])) {
+            return $actions[$position]($request);
+        } else {
+            abort(401);
+        }
+    }
 }

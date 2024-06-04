@@ -17,9 +17,21 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-         if(Auth::user()->position == 'ADMIN'){
-            return $next($request);
+        if (!Auth::check()) {
+            return redirect("/");
         }
+
+        $position = Auth::user()->position;
+        $actions = [
+            'ADMIN' => fn ($request) => $next($request),
+            'MANAGER' => fn () => redirect()->route('auth2.dashboard'),
+            'EMPLOYEE' => fn () => redirect()->route('EmpDashboard'),
+        ];
+
+        if (isset($actions[$position])) {
+            return $actions[$position]($request);
+        } else {
             abort(401);
- }
+        }
+    }
 }

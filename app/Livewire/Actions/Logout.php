@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Actions;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -16,5 +17,6 @@ class Logout
 
         Session::invalidate();
         Session::regenerateToken();
+        Cache::flush();
     }
 }

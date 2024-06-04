@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Employee;
 
-
 use Livewire\Component;
 use Livewire\Attributes\Layout;
-#[Layout('layouts.employee')]
 
-class AccountSettings extends Component
+#[Layout('layouts.employee')]
+class EmpVoting extends Component
 {
     public function render()
     {
-        return view('livewire.employee.account-settings');
+        return view('livewire.employee.emp_voting');
     }
 }

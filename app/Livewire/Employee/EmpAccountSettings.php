@@ -2,13 +2,16 @@
 
 namespace App\Livewire\Employee;
 
+
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+
 #[Layout('layouts.employee')]
-class Rewards extends Component
+
+class EmpAccountSettings extends Component
 {
     public function render()
     {
-        return view('livewire.employee.rewards');
+        return view('livewire.employee.emp_account-settings');
     }
 }

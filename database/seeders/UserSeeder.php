@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'email' => 'employee@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
-                'position' => 'HR',
+                'position' => 'EMPLOYEE',
                 'password' => Hash::make('password'),
             ],
             [

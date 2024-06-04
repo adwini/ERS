@@ -30,11 +30,13 @@ $headers = [
             </div>
         </section>
     @else
-        <div class="max-w-screen-sm mx-auto mb-8 text-center lg:mb-16">
-            <h2 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-200">Total Token {{ $available_token }}
-            </h2>
-            {{-- <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind</p> --}}
+        <div class="mb-6 ">
+
+            <p
+                class="block w-full p-4 text-3xl font-semibold text-center text-gray-900 border border-gray-300 rounded-lg h-2/4 sm:text-lg dark:text-gray-400 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                TOTAL TOKEN: {{ $available_token }}
         </div>
+
 
         <x-mary-table :headers="$headers" :rows="$branches" :row-decoration striped
             @row-click="$wire.edit($event.detail.id)" with-pagination>

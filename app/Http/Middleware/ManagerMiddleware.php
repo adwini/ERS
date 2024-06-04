@@ -16,11 +16,21 @@ class ManagerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->position == 'MANAGER'){
-            return $next($request);
-            // return redirect()->route('auth2.dashboard');
+        if (!Auth::check()) {
+            abort(401);
         }
 
-        abort(401);
+        $position = Auth::user()->position;
+        $actions = [
+            'MANAGER' => fn ($request) => $next($request),
+            'EMPLOYEE' => fn () => redirect()->route('EmpDashboard'),
+            'ADMIN' => fn () => redirect()->route('dashboard'),
+        ];
+
+        if (isset($actions[$position])) {
+            return $actions[$position]($request);
+        } else {
+            abort(401);
+        }
     }
 }
