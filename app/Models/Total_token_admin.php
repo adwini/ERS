@@ -9,6 +9,8 @@ class Total_token_admin extends Model
 {
     use HasFactory;
 
+    protected $table = 'total_token_admin';
+    
     protected $primaryKey = 'id';
 
     protected $fillable = [

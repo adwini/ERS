@@ -9,6 +9,7 @@ class Token_Exchange extends Model
 {
     use HasFactory;
 
+    protected $table = 'token_exchange';
     protected $primaryKey = 'id';
 
     protected $fillable = [
