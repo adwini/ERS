@@ -9,6 +9,7 @@ class Tokens extends Model
 {
     use HasFactory;
 
+    protected $table = 'tokens';
     protected $primaryKey = 'id';
 
     protected $fillable = [
