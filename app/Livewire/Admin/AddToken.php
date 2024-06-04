@@ -48,16 +48,12 @@ class AddToken extends Component
         ]);
     }
 
-    protected $rules = [
-        'givenTo' => 'required|string',
-        'dateIssued' =>  'required',
-        'given_by' => 'required',
-        'no_of_tokens_given' => 'required|int',
-    ];
     // #[Validate('required|string')]
 
     public $givenTo = '';
+
     public $given_by = '';
+
     // #[Validate('required')]
 
     public $dateIssued = '';
@@ -67,12 +63,8 @@ class AddToken extends Component
 
     public bool $addModal = false;
 
-    // public function edit($id)
-    // {
-    //     $branch = Branch::find($id);
-    //     $this->form->setToken($branch);
-    //     $this->addModal = true;
-    // }
+    public $branchId = '';
+    public $userId = '';
 
 
     public function edit($id)
@@ -81,8 +73,17 @@ class AddToken extends Component
 
         $branch = Branch::find($id);
         if ($branch) {
+            //Req For givenTo
             $this->form->branchName = $branch->branchName;
             $this->givenTo = $branch->branchName;
+
+            //Req For User Id
+            $this->given_by = Auth::id();
+
+
+
+
+
             $this->dateIssued = $dateNow;
             $this->addModal = true;
         }
@@ -90,30 +91,35 @@ class AddToken extends Component
 
     public function addToken()
     {
-        // $this->form->save();
-        // $this->addModal = false;
-        // $this->success('Token Successfully Given');
+
 
         try {
 
-            $this->validate();
 
-            $dateNow = Carbon::now()->format('Y-m-d H:i:s');
+            $this->validate(
+                [
+                    'givenTo' => 'required|string',
+                    'dateIssued' =>  'required',
+                    'given_by' => 'required',
+                    'no_of_tokens_given' => 'required|int',
+                ]
+            );
 
             // $added_token = Tokens::create([
             //     $validated
             // ]);
             $added_token = Tokens::create([
+
                 'givenTo' => $this->givenTo,
-                'dateIssued' => $dateNow,
-                'given_by' => auth()->id(),
-                'no_of_tokens_given' => $this->no_of_tokens_given
+                'given_by' => $this->given_by,
+                'dateIssued' => $this->dateIssued,
+                'no_of_tokens_given' => $this->no_of_tokens_given,
             ]);
 
             $user = User::where('name', '=', $added_token->givenTo)->first();
             if ($user != null) {
                 $user->no_of_tokens += $added_token->no_of_tokens_given;
-                $user->save();
+                $user->save([$added_token]);
 
                 $this->success(
                     'Giving token has been successful',
@@ -124,7 +130,7 @@ class AddToken extends Component
             $branch = Branch::where('branchName', '=', $added_token->givenTo)->first();
             if ($branch != null) {
                 $branch->no_of_token_available += $added_token->no_of_tokens_given;
-                $branch->save();
+                $branch->save([$added_token]);
 
                 $this->success(
                     'Giving token has been successful',
@@ -134,7 +140,7 @@ class AddToken extends Component
             // $this->delete($added_token->id);
             $this->reset();
         } catch (Exception $e) {
-            return $e;
+            dd($e->getMessage());
         }
     }
 

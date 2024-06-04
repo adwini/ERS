@@ -13,7 +13,6 @@ class Tokens extends Model
 
     protected $fillable = [
         'givenTo',
-        // 'givenBy',
         'dateIssued',
         'given_by',
         'no_of_tokens_given'

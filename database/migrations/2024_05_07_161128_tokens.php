@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('given_by');
             $table->foreign('given_by')->references('id')->on('users');
             // $table->string('givenBy');
-            $table->dateTime('dateIssued', precision:0);
+            $table->dateTime('dateIssued', precision: 0);
             $table->integer('no_of_tokens_given')->default(0);
             $table->timestamps();
         });

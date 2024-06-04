@@ -12,6 +12,7 @@ class Branch extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
+
         'branchName',
         'branchLoc',
         'no_of_employee',
