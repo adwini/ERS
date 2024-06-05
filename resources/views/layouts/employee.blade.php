@@ -36,15 +36,8 @@
             <img src="{{ asset('image/ers_logo.png') }}" alt=" Rewarding System" class="w-auto h-15" />
 
             {{-- MENU --}}
-            <x-mary-menu activate-by-route>
+            <livewire:globalComponents.sidebar_employee />
 
-                <x-mary-menu-item title="Dashboard" icon="o-cube" link="/usr/dashboard" />
-                <x-mary-menu-item title="Rewards" icon="o-trophy" link="/usr/rewards" />
-                <x-mary-menu-item title="Voting" icon="o-users" link="/usr/voting" />
-                <x-mary-menu-item title="Account Settings" icon="o-wrench-screwdriver" link="/usr/settings" />
-
-
-            </x-mary-menu>
         </x-slot:sidebar>
 
         {{-- The `$slot` goes here --}}

@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
 
             ],
             [
-                'name' => 'thesis2',
+                'name' => 'Godwin Flores',
                 'email' => 'employee@example.com',
                 'number' => '09123456789',
                 'no_of_tokens' => 0,
