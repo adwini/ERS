@@ -1,6 +1,5 @@
-
 <div>
 
- <livewire:globalComponents.branch_table/>
+    <livewire:globalComponents.maintainance />
 
 </div>
