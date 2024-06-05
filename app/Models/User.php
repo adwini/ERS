@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'number',
+        'department',
         'position',
         'no_of_tokens',
         'password',

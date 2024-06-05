@@ -17,4 +17,15 @@ class Voting extends Component
         public function placeholder(){
         return view ('skeleton');
     }
+
+    // public $name = '';
+    // public $sick_leave;
+    // public $vacation_leave;
+    // public $awol;
+
+    public $attendace_report = [];
+
+    public function mount() {
+        
+    }
 }
