@@ -16,7 +16,7 @@ new class extends Component {}; ?>
             <h1
                 class="mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">
                 Under Maintenance</h1>
-            <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Our Enterprise administrators
+            <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Our System Administrators
                 are performing scheduled maintenance.</p>
         </div>
     </section>

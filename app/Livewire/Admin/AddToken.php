@@ -58,7 +58,7 @@ class AddToken extends Component
     // #[Validate('required')]
 
     public $dateIssued = '';
-    // #[Validate('required|int')]
+    #[Validate('required|int')]
 
     public $no_of_tokens_given;
 
@@ -69,21 +69,17 @@ class AddToken extends Component
         $dateNow = Carbon::now()->format('Y-m-d H:i:s');
 
         $branch = Branch::find($id);
-        if ($branch) {
-            //Req For givenTo
-            $this->form->branchName = $branch->branchName;
-            $this->givenTo = $branch->branchName;
+        // if ($branch) {
+        //Req For givenTo
+        $this->form->branchName = $branch->branchName;
+        $this->givenTo = $branch->branchName;
 
-            //Req For User Id
-            $this->given_by = Auth::id();
+        //Req For User Id
+        $this->given_by = Auth::id();
 
-
-
-
-
-            $this->dateIssued = $dateNow;
-            $this->addModal = true;
-        }
+        $this->dateIssued = $dateNow;
+        $this->addModal = true;
+        // }
     }
 
     public function addToken()
@@ -116,32 +112,31 @@ class AddToken extends Component
             $over_all_tokens = Total_token_admin::latest()->take(1)->first();
             $over_all_tokens->token_available -= $added_token->no_of_tokens_given;
             $over_all_tokens->save();
+            $this->addModal = false;
+
 
             $user = User::where('name', '=', $added_token->givenTo)->first();
             if ($user != null) {
                 $user->no_of_tokens += $added_token->no_of_tokens_given;
                 $user->save();
-
-                $this->success(
-                    'Giving token has been successful',
-                    redirectTo: '/token'
-                );
             }
 
             $branch = Branch::where('branchName', '=', $added_token->givenTo)->first();
             if ($branch != null) {
                 $branch->no_of_token_available += $added_token->no_of_tokens_given;
                 $branch->save();
-
-                $this->success(
-                    'Giving token has been successful',
-                    redirectTo: '/token'
-                );
+                $this->addModal = false;
             }
+
+
             // $this->delete($added_token->id);
-            $this->reset();
+            // $this->reset();
+            $this->success(
+                'Giving token has been successful',
+                redirectTo: '/token'
+            );
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
         }
     }
 
@@ -157,9 +152,9 @@ class AddToken extends Component
         }
     }
 
-    public function delete_token($id)
-    {
-        $branch = Tokens::find($id);
-        $branch->delete();
-    }
+    // public function delete_token($id)
+    // {
+    //     $branch = Tokens::find($id);
+    //     $branch->delete();
+    // }
 }

@@ -36,7 +36,5 @@ class AddTokenForm extends Form
     {
         $this->branch = $branch;
         $this->branchName = $branch->branchName;
-
-        // $this->givenTo = $this->branchName;
     }
 }
