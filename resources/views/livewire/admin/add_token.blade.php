@@ -22,7 +22,7 @@ $headers = [
         <section>
             <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
                 <div class="max-w-screen-sm mx-auto text-center">
-                    <p class="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-white">
+                    <p class="mb-4 text-3xl font-bold tracking-tight text-gray-500 dark:text-gray-400 md:text-4xl ">
                         Something's missing.</p>
                     <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, we couldn't find any
                         branches matching your search criteria.</p>
@@ -39,25 +39,25 @@ $headers = [
 
 
         <x-mary-table :headers="$headers" :rows="$branches" :row-decoration striped
-            @row-click="$wire.edit($event.detail.id)" with-pagination>
+            @row-click="$wire.edit($event.detail.id)" with-pagination class="table">
 
             @scope('header_branchName', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
             @scope('header_branchLoc', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
             @scope('header_no_of_employee', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
             @scope('header_no_of_token_available', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope

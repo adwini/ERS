@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="night">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -33,7 +33,7 @@
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
 
             {{-- BRAND --}}
-            <img src="{{ asset('image/ers_logo.png') }}" alt=" Rewarding System" class="w-auto h-15" />
+            <img src="{{ asset('image/EMPLOYEE.png') }}" alt=" Rewarding System" class="w-auto h-15" />
 
             {{-- MENU --}}
             <livewire:globalComponents.sidebar_admin />

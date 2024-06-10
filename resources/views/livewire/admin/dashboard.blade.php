@@ -35,22 +35,22 @@ $headers = [
         <x-mary-table :headers="$headers" :rows="$branches" :row-decoration striped with-pagination>
 
             @scope('header_branchName', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
             @scope('header_branchLoc', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
             @scope('header_no_of_employee', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
             @scope('header_no_of_token_available', $header)
-                <h2 class="text-sm font-bold text-gray-350">
+                <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
