@@ -21,7 +21,7 @@ new class extends Component {
             <x-mary-menu-item title="Branch List" icon="o-clipboard-document-list" link="/branch-list" />
         </x-mary-menu-sub>
         <x-mary-menu-item title="Add Token" icon="o-squares-plus" link="/token" />
-        <x-mary-menu-item title="Voting" icon="o-rectangle-group" link="/voting" />
+        <x-mary-menu-item title="Voting" icon="o-users" link="/voting" />
         <x-mary-menu-item title="Logout" icon="o-power" wire:click='logout' />
 
 
