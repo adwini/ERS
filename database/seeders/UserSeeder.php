@@ -27,6 +27,14 @@ class UserSeeder extends Seeder
 
             ],
             [
+                'name' => 'Godwin Flores',
+                'email' => 'employee@example.com',
+                'number' => '09123456789',
+                'no_of_tokens' => 0,
+                'position' => 'EMPLOYEE',
+                'password' => Hash::make('password'),
+            ],
+            [
                 'name' => 'Jan Balbon',
                 'email' => 'hrjan@example.com',
                 'number' => '09123456789',
