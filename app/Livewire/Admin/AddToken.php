@@ -98,9 +98,6 @@ class AddToken extends Component
                 ]
             );
 
-            // $added_token = Tokens::create([
-            //     $validated
-            // ]);
             $added_token = Tokens::create([
 
                 'givenTo' => $this->givenTo,

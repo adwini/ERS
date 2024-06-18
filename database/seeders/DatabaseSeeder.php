@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             BranchSeeder::class,
-            AllTokenAdmin::class
+            AllTokenAdmin::class,
+            ImportExcel::class,
         ]);
     }
 }
