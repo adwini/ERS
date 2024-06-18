@@ -30,6 +30,7 @@ class UserSeeder extends Seeder
                 'name' => 'Godwin Flores',
                 'email' => 'employee@example.com',
                 'number' => '09123456789',
+                'department' => '',
                 'no_of_tokens' => 0,
                 'position' => 'EMPLOYEE',
                 'password' => Hash::make('password'),
