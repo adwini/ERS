@@ -23,14 +23,18 @@ class ManagerMiddleware
         $position = Auth::user()->position;
         $actions = [
             'MANAGER' => fn ($request) => $next($request),
-            'EMPLOYEE' => fn () => redirect()->route('EmpDashboard'),
+            'EMPLOYEE||HR' => fn () => redirect()->route('EmpDashboard'),
             'ADMIN' => fn () => redirect()->route('dashboard'),
         ];
 
-        if (isset($actions[$position])) {
-            return $actions[$position]($request);
-        } else {
-            abort(401);
+        foreach ($actions as $roles => $action) {
+            $rolesArray = explode('||', $roles);
+            if (in_array($position, $rolesArray)) {
+                return $action($request);
+            }
         }
+
+        // If no matching role found, abort with unauthorized status
+        abort(401);
     }
 }

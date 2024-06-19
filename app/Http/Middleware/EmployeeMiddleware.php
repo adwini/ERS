@@ -23,15 +23,25 @@ class EmployeeMiddleware
         $position = Auth::user()->position;
 
         $actions = [
-            'EMPLOYEE' => fn ($request) => $next($request),
+            'EMPLOYEE||HR' => fn ($request) => $next($request),
             'MANAGER' => fn () => redirect()->route('auth2.dashboard'),
             'ADMIN' => fn () => redirect()->route('dashboard'),
         ];
 
-        if (isset($actions[$position])) {
-            return $actions[$position]($request);
-        } else {
-            abort(401);
+        // if (isset($actions[$position])) {
+        //     return $actions[$position]($request);
+        // } else {
+        //     abort(401);
+        // }
+
+        foreach ($actions as $roles => $action) {
+            $rolesArray = explode('||', $roles);
+            if (in_array($position, $rolesArray)) {
+                return $action($request);
+            }
         }
+
+        // If no matching role found, abort with unauthorized status
+        abort(401);
     }
 }

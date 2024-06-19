@@ -32,6 +32,9 @@ new #[Layout('layouts.guest')] class extends Component {
             case 'EMPLOYEE':
                 $this->redirectIntended(default: route('EmpDashboard', absolute: false), navigate: true);
                 break;
+            case 'HR':
+                $this->redirectIntended(default: route('EmpDashboard', absolute: false), navigate: true);
+                break;
 
             default:
                 abort(401);

@@ -25,13 +25,17 @@ class AdminMiddleware
         $actions = [
             'ADMIN' => fn ($request) => $next($request),
             'MANAGER' => fn () => redirect()->route('auth2.dashboard'),
-            'EMPLOYEE' => fn () => redirect()->route('EmpDashboard'),
+            'EMPLOYEE||HR' => fn () => redirect()->route('EmpDashboard'),
         ];
 
-        if (isset($actions[$position])) {
-            return $actions[$position]($request);
-        } else {
-            abort(401);
+        foreach ($actions as $roles => $action) {
+            $rolesArray = explode('||', $roles);
+            if (in_array($position, $rolesArray)) {
+                return $action($request);
+            }
         }
+
+        // If no matching role found, abort with unauthorized status
+        abort(401);
     }
 }
