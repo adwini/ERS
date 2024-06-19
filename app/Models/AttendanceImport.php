@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ImportExcel extends Model
+class AttandanceImport extends Model
 {
     use HasFactory;
 
