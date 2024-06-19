@@ -111,6 +111,6 @@ class ImportExcel extends Seeder
                 'total_absents' => 6,
             ],
         ];
-        DB::table('import_excels')->insert($employee_reports);
+        DB::table('attendace_import')->insert($employee_reports);
     }
 }

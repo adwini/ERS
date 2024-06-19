@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             BranchSeeder::class,
             AllTokenAdmin::class,
-            ImportExcel::class,
+            // ImportExcel::class,
         ]);
     }
 }
