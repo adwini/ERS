@@ -20,12 +20,11 @@ new class extends Component {
         <x-mary-menu-item title="Rewards" icon="o-trophy" link="/usr/rewards" />
         <x-mary-menu-item title="Voting" icon="o-users" link="/usr/voting" />
         <x-mary-menu-item title="Account Settings" icon="o-wrench-screwdriver" link="/usr/settings" />
-
-
         <x-mary-menu-item title="Logout" icon="o-power" wire:click='logout' />
 
-
-
     </x-mary-menu>
+
+
+
 
 </div>
