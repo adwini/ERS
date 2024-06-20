@@ -6,8 +6,6 @@ use App\Imports\AttendaceImports;
 use Livewire\WithFileUploads;
 
 new class extends Component {
-    use WithFileUploads;
-
     public $attandance_import = 'attendance.xlsx';
 
     public function import()
@@ -28,7 +26,7 @@ new class extends Component {
             <x-mary-file wire:model=" " accept=".xls,.xlsx" />
         </x-slot:middle>
         <x-slot:actions>
-            <x-mary-button icon="o-cloud-arrow-up" class="btn-ghost" label="Upload" />
+            <x-mary-button icon="o-cloud-arrow-up" wire:click="import" class="btn-ghost" label="Upload" spinner />
         </x-slot:actions>
 
 
