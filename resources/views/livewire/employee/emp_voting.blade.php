@@ -1,5 +1,6 @@
 <div>
-    {{-- Do your work, then step back. --}}
     <livewire:globalComponents.maintainance />
+    {{-- <livewire:employee.attendance_upload /> --}}
+
 
 </div>

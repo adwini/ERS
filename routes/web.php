@@ -4,6 +4,7 @@ use App\Livewire\Admin\AddToken;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Modify;
 use App\Livewire\Admin\Voting;
+use App\Livewire\Employee\AttendanceUpload;
 use App\Livewire\Employee\EmpAccountSettings;
 use App\Livewire\Employee\EmpDashboard;
 use App\Livewire\Employee\EmpRewards;
@@ -49,6 +50,9 @@ Route::middleware(['auth', 'verified', 'employee'])->group(function () {
     Route::get('/usr/dashboard', EmpDashboard::class)->name('EmpDashboard');
     Route::get('/usr/rewards', EmpRewards::class)->name('EmpRewards');
     Route::get('/usr/voting', EmpVoting::class)->name('EmpVoting');
+    Route::get('/usr/attendance-upload', AttendanceUpload::class)->name('AttendanceUpload');
+
+    // Volt::route('/usr/upload', 'employee.hr_file-upload');
 });
 
 require __DIR__ . '/auth.php';
