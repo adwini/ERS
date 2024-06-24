@@ -64,7 +64,7 @@ class ImportExcel extends Seeder
             ],
             [
                 'name' => 'Kristine Gilbuena',
-                'date_hired' => '2022-010-12',
+                'date_hired' => '2022-10-12',
                 'sick_leave' => 0,
                 'vacation_leave' => 2,
                 'awol' => 1,
@@ -96,7 +96,7 @@ class ImportExcel extends Seeder
             ],
             [
                 'name' => 'John Francis Mondeñedo',
-                'date_hired' => '2022-012-01',
+                'date_hired' => '2022-12-01',
                 'sick_leave' => 3,
                 'vacation_leave' => 0,
                 'awol' => 2,
