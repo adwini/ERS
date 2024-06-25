@@ -6,13 +6,14 @@ use App\Imports\AttendaceImports;
 use Livewire\WithFileUploads;
 
 new class extends Component {
-    public $attandance_import = 'attendance.xlsx';
+    public $attandance_import;
 
     public function import()
     {
         try {
-            Excel::import(new AttendaceImports(), $this->attandance_import);
             dd('Okay!');
+            Excel::import(new AttendaceImports(), $this->attandance_import);
+            // dd('Okay!');
         } catch (Exception $e) {
             dd($e);
         }
