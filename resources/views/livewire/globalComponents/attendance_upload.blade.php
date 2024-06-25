@@ -6,6 +6,8 @@ use App\Imports\AttendaceImports;
 use Livewire\WithFileUploads;
 
 new class extends Component {
+    use WithFileUploads;
+
     public $attandance_import;
 
     public function import()
