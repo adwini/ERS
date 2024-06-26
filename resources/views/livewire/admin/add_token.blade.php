@@ -69,11 +69,12 @@ $headers = [
     @endif
     {{-- Add Modal --}}
     <x-mary-modal wire:model="addModal" persistent class="backdrop-blur">
+
         <x-mary-form wire:submit.prevent="addToken">
             <x-mary-input type="hidden" wire:model="givenTo" />
-            {{-- <x-mary-input type="hidden" wire:model="given_by" /> --}}
             <x-mary-input label="Branch Name" wire:model="form.branchName" disabled />
-            <x-mary-input label="Add Token" wire:model="no_of_tokens_given" />
+            <x-mary-input label="Add Token" wire:model="no_of_tokens_given" omit-error hint="This field is required." />
+
             <x-slot:actions>
 
                 <x-mary-button label="Cancel" link="/token" />

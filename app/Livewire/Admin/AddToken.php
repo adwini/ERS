@@ -74,6 +74,8 @@ class AddToken extends Component
         $this->form->branchName = $branch->branchName;
         $this->givenTo = $branch->branchName;
 
+        $this->form->no_of_tokens_given = $this->no_of_tokens_given;
+
         //Req For User Id
         $this->given_by = Auth::id();
 
@@ -148,10 +150,4 @@ class AddToken extends Component
             dd($e);
         }
     }
-
-    // public function delete_token($id)
-    // {
-    //     $branch = Tokens::find($id);
-    //     $branch->delete();
-    // }
 }

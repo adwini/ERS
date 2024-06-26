@@ -5,15 +5,18 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
+use Mary\Traits\Toast;
 
 new #[Layout('layouts.guest')] class extends Component {
     public LoginForm $form;
+    use Toast;
 
     /**
      * Handle an incoming authentication request.
      */
     public function login(): void
     {
+        $this->success('Authenticated', timeout: 1500, css: 'bg-gray-700 text-base-100 p-4   shadow-lg text-green-500  ', icon: 'o-shield-check');
         $this->validate();
 
         $this->form->authenticate();
