@@ -21,6 +21,6 @@ class AttandanceImport extends Model
     ];
 
     protected $cast = [
-        'date_hired' => 'date:Y-m-d',
+        'date_hired' => 'date:m-d-Y',
     ];
 }
