@@ -3,30 +3,44 @@
 namespace App\Livewire\Employee;
 
 use Livewire\Component;
-use Livewire\Attributes\Layout;
+use Livewire\WithFileUploads;
+use App\Models\EmpAttendance;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AttendaceImports;
-use Exception;
+
+use Livewire\Attributes\Layout;
+use App\Imports\AttendanceImport;
+use Mary\Traits\Toast;
+
 
 #[Layout('layouts.employee')]
 class AttendanceUpload extends Component
 {
+    use WithFileUploads, Toast;
+    public $file;
+
     public function render()
     {
-        return view('livewire.employee.attendance-upload');
+        $employees = EmpAttendance::paginate(5);
+        return view('livewire.employee.attendance-upload', [
+            'employees' => $employees,
+        ]);
     }
 
     public $attandance_import = '';
 
     public function import()
     {
-        try {
-            dd($this->attandance_import);
-            Excel::import(new AttendaceImports(), request()->file($this->attandance_import));
-            // dd('Okay!');
-        } catch (Exception $e) {
-            dd($e);
-        }
-        // return redirect('/')->with('success', 'All Good!');
+        $this->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        Excel::import(new AttendanceImport, $this->file->path());
+
+        // session()->flash('message', 'Inventory imported successfully.');
+
+        $this->success(
+            'Imported successfully',
+            redirectTo: '/usr/attendance-upload'
+        );
     }
 }

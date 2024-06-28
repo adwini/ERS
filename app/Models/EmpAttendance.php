@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AttandanceImport extends Model
+class EmpAttendance extends Model
 {
     use HasFactory;
-
-    protected $table = 'importExcel';
 
     protected $fillable = [
         'name',
@@ -18,9 +16,5 @@ class AttandanceImport extends Model
         'vacation_leave',
         'awol',
         'total_absents',
-    ];
-
-    protected $cast = [
-        'date_hired' => 'date:m-d-Y',
     ];
 }

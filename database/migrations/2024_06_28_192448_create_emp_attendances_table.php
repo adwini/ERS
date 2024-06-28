@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendace_import', function (Blueprint $table) {
+        Schema::create('emp_attendances', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->date('date_hired');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendace_import');
+        Schema::dropIfExists('emp_attendances');
     }
 };
