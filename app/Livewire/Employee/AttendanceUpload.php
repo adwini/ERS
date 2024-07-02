@@ -34,6 +34,12 @@ class AttendanceUpload extends Component
             'file' => 'required|mimes:xls,xlsx',
         ]);
 
+        $attendance = EmpAttendance::count();
+
+        if($attendance > 0){
+            EmpAttendance::truncate();
+        }
+
         Excel::import(new AttendanceImport, $this->file->path());
 
         // session()->flash('message', 'Inventory imported successfully.');
