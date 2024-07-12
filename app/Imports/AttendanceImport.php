@@ -18,12 +18,8 @@ class AttendanceImport implements ToModel, WithHeadingRow
     {
         return new EmpAttendance([
             'name' => $row['name'],
-            'date_hired' =>
-            Carbon::parse($row['date_hired'])->format('Y-m-d'),
-            'sick_leave' => $row['sick_leave'],
-            'vacation_leave' => $row['vacation_leave'],
-            'awol' => $row['awol'],
-            'total_absents' => $row['total_absents'],
+            'branch_id' => $row['branch_id'],
+            'department' => $row['department'],
         ]);
     }
 }
