@@ -11,10 +11,12 @@ class EmpAttendance extends Model
 
     protected $fillable = [
         'name',
-        'date_hired',
-        'sick_leave',
-        'vacation_leave',
-        'awol',
-        'total_absents',
+        'branch_id',
+        'department',
     ];
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 }

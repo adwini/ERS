@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('number', 11);
             $table->string('department');
+            $table->foreignIdFor(\App\Models\Branch::class)->constrained();
             $table->integer('no_of_tokens')->nullable();
             $table->string('position');
             $table->timestamp('email_verified_at')->nullable();

@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'number',
         'department',
+        // 'branch_id',
         'position',
         'no_of_tokens',
         'password',
@@ -74,5 +75,9 @@ class User extends Authenticatable
     public function tokens()
     {
         return $this->hasMany(Tokens::class);
+    }
+    public function branch() 
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

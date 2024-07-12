@@ -12,4 +12,8 @@ class EmpVoting extends Component
     {
         return view('livewire.employee.emp_voting');
     }
+
+    public function votingRound1(){
+        
+    }
 }
