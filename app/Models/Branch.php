@@ -24,4 +24,12 @@ class Branch extends Model
     {
         return $this->hasMany(Tokens::class);
     }
+    public function users() 
+    {
+        return $this->hasMany(User::class);
+    }
+    public function emp_attendance() 
+    {
+        return $this->hasMany(EmpAttendance::class);
+    }
 }

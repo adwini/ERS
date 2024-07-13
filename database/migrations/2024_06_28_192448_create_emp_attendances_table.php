@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('emp_attendances', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('date_hired');
-            $table->integer('sick_leave');
-            $table->integer('vacation_leave');
-            $table->integer('awol');
-            $table->integer('total_absents');
+            $table->foreignIdFor(\App\Models\Branch::class)->constrained();
+            $table->string('department');
             $table->timestamps();
         });
     }
