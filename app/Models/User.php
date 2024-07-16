@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'name';
 
     /**
      * The attributes that are mass assignable.
@@ -79,5 +79,9 @@ class User extends Authenticatable
     public function branch() 
     {
         return $this->belongsTo(Branch::class);
+    }
+    public function voting()
+    {
+        return $this->hasOne(Voting::class);
     }
 }
