@@ -2,11 +2,7 @@
 
 $headers = [
     ['key' => 'name', 'label' => 'NAME'],
-    ['key' => 'date_hired', 'label' => 'Date Hired'],
-    ['key' => 'sick_leave', 'label' => 'Sick Leave'],
-    ['key' => 'vacation_leave', 'label' => 'Vacation Leave'],
-    ['key' => 'awol', 'label' => 'Awol'],
-    ['key' => 'total_absents', 'label' => 'Total Absent'],
+    ['key' => 'department', 'label' => 'DEPARTMENT'],
 
     // ['key' => 'city.name', 'label' => 'City'] # <---- nested attributes
 ];
@@ -46,12 +42,12 @@ $headers = [
                     {{ $header['label'] }}
                 </h2>
             @endscope
-            @scope('header_date_hired', $header)
+            @scope('header_department', $header)
                 <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
             @endscope
-            @scope('header_sick_leave', $header)
+            {{-- @scope('header_sick_leave', $header)
                 <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
@@ -70,7 +66,7 @@ $headers = [
                 <h2 class="text-sm font-bold text-neutral-400">
                     {{ $header['label'] }}
                 </h2>
-            @endscope
+            @endscope --}}
         </x-mary-table>
 
     @endif

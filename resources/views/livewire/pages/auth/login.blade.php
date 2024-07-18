@@ -16,41 +16,32 @@ new #[Layout('layouts.guest')] class extends Component {
      */
     public function login(): void
     {
-        $this->success('Authenticated', timeout: 1500, css: 'bg-gray-700 text-base-100 p-4   shadow-lg text-green-500  ', icon: 'o-shield-check');
         $this->validate();
 
-        $this->form->authenticate();
+        if (!$this->form->authenticate()) {
+            Session::regenerate();
+            $this->success('Authenticated', timeout: 1500, css: 'bg-gray-700 text-base-100 p-4   shadow-lg text-green-500  ', icon: 'o-shield-check');
 
-        Session::regenerate();
+            $position = Auth::user()->position;
 
-        $position = Auth::user()->position;
+            switch ($position) {
+                case 'ADMIN':
+                    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+                    break;
+                case 'MANAGER':
+                    $this->redirectIntended(default: route('auth2.dashboard', absolute: false), navigate: true);
+                    break;
+                case 'EMPLOYEE':
+                    $this->redirectIntended(default: route('EmpDashboard', absolute: false), navigate: true);
+                    break;
+                case 'HR':
+                    $this->redirectIntended(default: route('EmpDashboard', absolute: false), navigate: true);
+                    break;
 
-        switch ($position) {
-            case 'ADMIN':
-                $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
-                break;
-            case 'MANAGER':
-                $this->redirectIntended(default: route('auth2.dashboard', absolute: false), navigate: true);
-                break;
-            case 'EMPLOYEE':
-                $this->redirectIntended(default: route('EmpDashboard', absolute: false), navigate: true);
-                break;
-            case 'HR':
-                $this->redirectIntended(default: route('EmpDashboard', absolute: false), navigate: true);
-                break;
-
-            default:
-                abort(401);
+                default:
+                    abort(401);
+            }
         }
-
-        // if (Auth::user()->position == 'ADMIN') {
-        //     $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
-        // }
-        // if (Auth::user()->position == 'MANAGER') {
-        //     $this->redirectIntended(default: route('auth2.dashboard', absolute: false), navigate: true);
-        // } else {
-        //     $this->redirectIntended(default: route('EmployeeDashboard', absolute: false), navigate: true);
-        // }
     }
 }; ?>
 

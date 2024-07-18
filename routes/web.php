@@ -22,7 +22,7 @@ use Livewire\Volt\Volt;
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
-    Route::view('profile', 'profile')->name('profile');
+    // Route::view('profile', 'profile')->name('profile');
     Route::get('/branch-list', Modify::class)->name('modify_branch');
     Route::get('/token', AddToken::class)->name('add_token');
     Route::get('/voting', Voting::class)->name('voting');

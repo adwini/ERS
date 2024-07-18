@@ -20,7 +20,7 @@ class AttendanceUpload extends Component
 
     public function render()
     {
-        $employees = EmpAttendance::paginate(5);
+        $employees = EmpAttendance::paginate(10);
         return view('livewire.employee.attendance-upload', [
             'employees' => $employees,
         ]);
@@ -36,7 +36,7 @@ class AttendanceUpload extends Component
 
         $attendance = EmpAttendance::count();
 
-        if($attendance > 0){
+        if ($attendance > 0) {
             EmpAttendance::truncate();
         }
 
